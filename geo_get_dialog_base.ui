@@ -65,7 +65,7 @@
       <attribute name="label">
        <string>Область поиска</string>
       </attribute>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="v_layer_list">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -75,7 +75,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="in_browse_btn">
        <property name="geometry">
         <rect>
          <x>250</x>
