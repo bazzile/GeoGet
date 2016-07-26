@@ -22,6 +22,7 @@
 """
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from qgis.core import *
 # Initialize Qt resources from file resources.py
 import resources
 # Import the code for the dialog
@@ -177,8 +178,13 @@ class GeoGet:
     def populateGui(self):
         """Make the GUI live."""
         self.populateComboBox(
-            self.dlg.v_layer_list, self.get_layers_names(), u'Выберите слой', True)
+            self.dlg.v_layer_list, self.get_layer_names(), u'Выберите слой', True)
         self.dlg.in_browse_btn.clicked.connect(self.select_input_file)
+
+        layer = self.Geometry.get_layer("test_poly")
+        geometry = self.Geometry.get_geometry(layer)
+        self.dlg.test_textBrowser.append(str(geometry))
+
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -193,7 +199,6 @@ class GeoGet:
 
     def run(self):
         """Run method that performs all the real work"""
-
         self.populateGui()
 
         # show the dialog
@@ -231,7 +236,7 @@ class GeoGet:
                 combo.setCurrentIndex(0)
         combo.blockSignals(False)
 
-    def get_layers_names(self):
+    def get_layer_names(self):
         """ Загружаем список открытых слоёв в диалог "выбор контура (v_layer_list)."""
         layer_list = []
         layers = self.iface.legendInterface().layers()
@@ -250,5 +255,18 @@ class GeoGet:
             filename = QFileDialog.getOpenFileName(
                 self.dlg, u"Укажите файл контура ", self.last_used_path, u'Полигоны (*.shp *.kml *tab *geojson)')
         if filename:
-            self.dlg.v_layer_list.insertItem(self.dlg.v_layer_list.count(), os.path.basename(filename))
+            self.dlg.v_layer_list.insertItem(self.dlg.v_layer_list.count(), os.path.basename(filename).split('.')[0])
             self.dlg.v_layer_list.setCurrentIndex(self.dlg.v_layer_list.count() - 1)
+            # TODO лучше всего загружать слой в QGIS вместе с результатами
+            self.load_layer(filename, os.path.basename(filename), 'ogr')
+        else:
+            pass
+
+    def load_layer(self, path, name, data_provider):
+        lyr = QgsVectorLayer(path, name.split('.')[0], data_provider)
+        if lyr.isValid():
+            QgsMapLayerRegistry.instance().addMapLayer(lyr)
+            # zoom to newly loaded layer
+            self.iface.setActiveLayer(lyr)
+            self.iface.zoomToActiveLayer()
+
