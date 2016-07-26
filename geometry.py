@@ -33,3 +33,22 @@ class Geomerty:
     def __init__(self,iface):
         self.iface = iface
 
+    def get_layer(self, layer_name):
+        layer = None
+        for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+            if lyr.name() == layer_name:
+                layer = lyr
+                break
+        return layer
+
+    def get_geometry(self, layer):
+        # TODO добавить поддержку объединения всех геометрий, подумать над крамотным экспортом в eWkt
+        crs = layer.crs().postgisSrid()
+        iter = layer.getFeatures()
+        for feature in iter:
+            # retrieve every feature with its geometry and attributes
+            # fetch geometry
+            geom = feature.geometry()
+            if geom.type() == QGis.Polygon:
+                wkt = geom.exportToWkt()
+        return ';'.join(('SRID=' + str(crs), wkt))
