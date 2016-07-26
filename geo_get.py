@@ -20,14 +20,15 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
-from PyQt4.QtGui import QAction, QIcon
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 # Initialize Qt resources from file resources.py
 import resources
 # Import the code for the dialog
 from geo_get_dialog import GeoGetDialog
-import os.path
-
+import os
+# импорт моих модулей
+from geometry import Geomerty
 
 class GeoGet:
     """QGIS Plugin Implementation."""
@@ -67,6 +68,12 @@ class GeoGet:
         # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'GeoGet')
         self.toolbar.setObjectName(u'GeoGet')
+
+        # подключение моих модулей
+        self.Geometry = Geomerty(self.iface)
+
+        # мои параметры
+        self.last_used_path = None
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -167,6 +174,11 @@ class GeoGet:
             callback=self.run,
             parent=self.iface.mainWindow())
 
+    def populateGui(self):
+        """Make the GUI live."""
+        self.populateComboBox(
+            self.dlg.v_layer_list, self.get_layers_names(), u'Выберите слой', True)
+        self.dlg.in_browse_btn.clicked.connect(self.select_input_file)
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -181,6 +193,9 @@ class GeoGet:
 
     def run(self):
         """Run method that performs all the real work"""
+
+        self.populateGui()
+
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
@@ -190,3 +205,50 @@ class GeoGet:
             # Do something useful here - delete the line containing pass and
             # substitute with your code.
             pass
+
+    def populateComboBox(self, combo, list, predef, sort):
+        # procedure to fill specified combobox with provided list
+        combo.blockSignals(True)
+        combo.clear()
+        model = QStandardItemModel(combo)
+        predefInList = None
+        for elem in list:
+            try:
+                item = QStandardItem(unicode(elem))
+            except TypeError:
+                item = QStandardItem(str(elem))
+            model.appendRow(item)
+            if elem == predef:
+                predefInList = elem
+        if sort:
+            model.sort(0)
+        combo.setModel(model)
+        if predef != "":
+            if predefInList:
+                combo.setCurrentIndex(combo.findText(predefInList))
+            else:
+                combo.insertItem(0, predef)
+                combo.setCurrentIndex(0)
+        combo.blockSignals(False)
+
+    def get_layers_names(self):
+        """ Загружаем список открытых слоёв в диалог "выбор контура (v_layer_list)."""
+        layer_list = []
+        layers = self.iface.legendInterface().layers()
+        for layer in layers:
+            layer_list.append(layer.name())
+        return layer_list
+
+    def select_input_file(self):
+        if self.last_used_path == None:
+            filename = QFileDialog.getOpenFileName(
+                self.dlg, u"Укажите файл контура ", "", u'Полигоны (*.shp *.kml *tab *geojson)')
+            # записываем в self.last_used_path последний использовавшийся каталог
+            self.input_shape_path = filename
+            self.last_used_path = os.path.dirname(filename)
+        else:
+            filename = QFileDialog.getOpenFileName(
+                self.dlg, u"Укажите файл контура ", self.last_used_path, u'Полигоны (*.shp *.kml *tab *geojson)')
+        if filename:
+            self.dlg.v_layer_list.insertItem(self.dlg.v_layer_list.count(), os.path.basename(filename))
+            self.dlg.v_layer_list.setCurrentIndex(self.dlg.v_layer_list.count() - 1)
