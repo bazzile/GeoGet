@@ -30,6 +30,7 @@ from geo_get_dialog import GeoGetDialog
 import os
 # импорт моих модулей
 from geometry import Geomerty
+from PSQL import PSQL
 
 class GeoGet:
     """QGIS Plugin Implementation."""
@@ -72,8 +73,9 @@ class GeoGet:
 
         # подключение моих модулей
         self.Geometry = Geomerty(self.iface)
+        self.PSQL = PSQL(self.iface)
 
-        # мои параметры
+        # мои переменный
         self.last_used_path = None
 
     # noinspection PyMethodMayBeStatic
@@ -181,9 +183,16 @@ class GeoGet:
             self.dlg.v_layer_list, self.get_layer_names(), u'Выберите слой', True)
         self.dlg.in_browse_btn.clicked.connect(self.select_input_file)
 
-        layer = self.Geometry.get_layer("test_poly")
-        geometry = self.Geometry.get_geometry(layer)
-        self.dlg.test_textBrowser.append(str(geometry))
+        # TODO удалить этот тест-блок
+        # layer = self.Geometry.get_layer("test_poly")
+        # geometry = self.Geometry.get_geometry(layer)
+        # self.dlg.test_textBrowser.append(str(geometry))
+        # if str(self.dlg.v_layer_list.currentText()) != u'Выберите слой' or None:
+        self.dlg.v_layer_list.activated.connect(lambda: self.t_zoom2layer(str(self.dlg.v_layer_list.currentText())))
+        self.dlg.search_btn.clicked.connect(lambda: self.t_search_db(str(self.dlg.v_layer_list.currentText())))
+
+
+
 
 
     def unload(self):
@@ -241,7 +250,11 @@ class GeoGet:
         layer_list = []
         layers = self.iface.legendInterface().layers()
         for layer in layers:
-            layer_list.append(layer.name())
+            layer_path = layer.source()
+            # layer_name = os.path.basename(layer_path)
+            layer_list.append(layer_path)
+            # # TODO учесть, что есть это:
+            # layer_list.append(layer.name())
         return layer_list
 
     def select_input_file(self):
@@ -249,13 +262,13 @@ class GeoGet:
             filename = QFileDialog.getOpenFileName(
                 self.dlg, u"Укажите файл контура ", "", u'Полигоны (*.shp *.kml *tab *geojson)')
             # записываем в self.last_used_path последний использовавшийся каталог
-            self.input_shape_path = filename
             self.last_used_path = os.path.dirname(filename)
         else:
             filename = QFileDialog.getOpenFileName(
                 self.dlg, u"Укажите файл контура ", self.last_used_path, u'Полигоны (*.shp *.kml *tab *geojson)')
+        # TODO отображать в списке только имя контура без пути и расшир (реализовать через словарь? (т.к. нужен и путь)
         if filename:
-            self.dlg.v_layer_list.insertItem(self.dlg.v_layer_list.count(), os.path.basename(filename).split('.')[0])
+            self.dlg.v_layer_list.insertItem(self.dlg.v_layer_list.count(), filename)
             self.dlg.v_layer_list.setCurrentIndex(self.dlg.v_layer_list.count() - 1)
             # TODO лучше всего загружать слой в QGIS вместе с результатами
             self.load_layer(filename, os.path.basename(filename), 'ogr')
@@ -263,10 +276,35 @@ class GeoGet:
             pass
 
     def load_layer(self, path, name, data_provider):
+        # TODO заменить на одну строчку через iface
         lyr = QgsVectorLayer(path, name.split('.')[0], data_provider)
         if lyr.isValid():
             QgsMapLayerRegistry.instance().addMapLayer(lyr)
+            # TODO вывести это в zoom2layer
             # zoom to newly loaded layer
             self.iface.setActiveLayer(lyr)
             self.iface.zoomToActiveLayer()
 
+    def t_zoom2layer(self, layer_path):
+        layers = self.iface.legendInterface().layers()
+        for layer in layers:
+            if layer.source() == layer_path:
+                self.iface.setActiveLayer(layer)
+                self.iface.zoomToActiveLayer()
+                #
+                # # выгрузка геометрии в textBox
+                # lyr = self.Geometry.get_layer(layer_path)
+                # geometry = self.Geometry.get_geometry(lyr)
+                # self.dlg.test_textBrowser.clear()
+                # self.dlg.test_textBrowser.append(str(geometry))
+                break
+
+    def t_search_db(self, layer_path):
+        layers = self.iface.legendInterface().layers()
+        for layer in layers:
+            if layer.source() == layer_path:
+                lyr = self.Geometry.get_layer(layer_path)
+                wkt = self.Geometry.get_geometry(lyr)
+                sql = self.PSQL.querySet(wkt)
+                self.PSQL.loadSql('GE01', sql)
+                break

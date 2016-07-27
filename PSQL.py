@@ -24,7 +24,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.QtSql import *
 from qgis.core import *
-from askcredentialdialog import askCredentialDialog
+# from askcredentialdialog import askCredentialDialog
 
 import os.path
 import datetime

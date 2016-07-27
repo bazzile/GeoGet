@@ -33,10 +33,10 @@ class Geomerty:
     def __init__(self,iface):
         self.iface = iface
 
-    def get_layer(self, layer_name):
+    def get_layer(self, layer_path):
         layer = None
         for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
-            if lyr.name() == layer_name:
+            if lyr.source() == layer_path:
                 layer = lyr
                 break
         return layer
@@ -51,4 +51,4 @@ class Geomerty:
             geom = feature.geometry()
             if geom.type() == QGis.Polygon:
                 wkt = geom.exportToWkt()
-        return ';'.join(('SRID=' + str(crs), wkt))
+        return wkt
