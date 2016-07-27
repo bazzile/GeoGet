@@ -88,6 +88,16 @@
         <string>...</string>
        </property>
       </widget>
+      <widget class="QTextBrowser" name="test_textBrowser">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>40</y>
+         <width>291</width>
+         <height>91</height>
+        </rect>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="DateSlot">
       <property name="geometry">
@@ -149,7 +159,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="ButtonRun_2">
+     <widget class="QPushButton" name="search_btn">
       <property name="maximumSize">
        <size>
         <width>100</width>
