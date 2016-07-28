@@ -31,6 +31,7 @@ import os
 # импорт моих модулей
 from geometry import Geomerty
 from PSQL import PSQL
+from controls import Contrlos
 
 class GeoGet:
     """QGIS Plugin Implementation."""
@@ -74,7 +75,7 @@ class GeoGet:
         # подключение моих модулей
         self.Geometry = Geomerty(self.iface)
         self.PSQL = PSQL(self.iface)
-
+        self.Controls = Contrlos(self.dlg)
         # мои переменный
         self.last_used_path = None
 
@@ -305,6 +306,7 @@ class GeoGet:
             if layer.source() == layer_path:
                 lyr = self.Geometry.get_layer(layer_path)
                 wkt = self.Geometry.get_geometry(lyr)
-                sql = self.PSQL.querySet(wkt)
+                # TODO добавить поддержку минимальной облачности (аккуратно, во внутр. БД есть -9999)
+                sql = self.PSQL.querySet(self.dlg.cloud_pct_mx.value(), wkt)
                 self.PSQL.loadSql('GE01', sql)
                 break
