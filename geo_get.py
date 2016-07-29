@@ -31,7 +31,7 @@ import os
 # импорт моих модулей
 from geometry import Geomerty
 from PSQL import PSQL
-from controls import Contrlos
+from controls import *
 
 class GeoGet:
     """QGIS Plugin Implementation."""
@@ -75,7 +75,9 @@ class GeoGet:
         # подключение моих модулей
         self.Geometry = Geomerty(self.iface)
         self.PSQL = PSQL(self.iface)
-        self.Controls = Contrlos(self.dlg)
+
+        self.Cloud_pct_control = SyncedSlider(self.dlg.cloud_pct_slider, self.dlg.cloud_pct_mx)
+        self.Angle_control = SyncedSlider(self.dlg.angle_slider, self.dlg.angle_mx)
         # мои переменный
         self.last_used_path = None
 
@@ -180,16 +182,26 @@ class GeoGet:
 
     def populateGui(self):
         """Make the GUI live."""
+
+        # TODO удалить этот импорт
+        self.iface.addVectorLayer(r"E:\!DB_test\test_poly_2.shp", 'test_poly_2', 'ogr')
+
+
         self.populateComboBox(
             self.dlg.v_layer_list, self.get_layer_names(), u'Выберите слой', True)
         self.dlg.in_browse_btn.clicked.connect(self.select_input_file)
+        # слой выбран, переключаем текущую [currentIndex()] вкладку на следующую
+        self.dlg.v_layer_list.activated.connect(
+            lambda: self.dlg.parameters_toolBox.setCurrentIndex(int(self.dlg.parameters_toolBox.currentIndex()) + 1))
+
+
 
         # TODO удалить этот тест-блок
         # layer = self.Geometry.get_layer("test_poly")
         # geometry = self.Geometry.get_geometry(layer)
         # self.dlg.test_textBrowser.append(str(geometry))
         # if str(self.dlg.v_layer_list.currentText()) != u'Выберите слой' or None:
-        self.dlg.v_layer_list.activated.connect(lambda: self.t_zoom2layer(str(self.dlg.v_layer_list.currentText())))
+        self.dlg.v_layer_list.activated.connect(lambda: self.zoom2layer(str(self.dlg.v_layer_list.currentText())))
         self.dlg.search_btn.clicked.connect(lambda: self.t_search_db(str(self.dlg.v_layer_list.currentText())))
 
 
@@ -205,7 +217,6 @@ class GeoGet:
             self.iface.removeToolBarIcon(action)
         # remove the toolbar
         del self.toolbar
-
 
     def run(self):
         """Run method that performs all the real work"""
@@ -286,16 +297,13 @@ class GeoGet:
             pass
 
     def load_layer(self, path, name, data_provider):
-        # TODO заменить на одну строчку через iface
-        lyr = QgsVectorLayer(path, name.split('.')[0], data_provider)
-        if lyr.isValid():
-            QgsMapLayerRegistry.instance().addMapLayer(lyr)
-            # TODO вывести это в zoom2layer
-            # zoom to newly loaded layer
-            self.iface.setActiveLayer(lyr)
-            self.iface.zoomToActiveLayer()
+        lyr = self.iface.addVectorLayer(path, name.split('.')[0], data_provider)
+        # zoom to newly loaded layer
+        self.zoom2layer(lyr.source())
+        # слой выбран, переключаем текущую [currentIndex()] вкладку на следующую
+        self.dlg.parameters_toolBox.setCurrentIndex(int(self.dlg.parameters_toolBox.currentIndex()) + 1)
 
-    def t_zoom2layer(self, layer_path):
+    def zoom2layer(self, layer_path):
         layers = self.get_layers_list()
         for layer in layers:
             if layer.source() == layer_path:
@@ -304,13 +312,17 @@ class GeoGet:
                 break
 
     def t_search_db(self, layer_path):
-        layers = self.clear_results(self.get_layers_list())
+        # TODO разобраться, почему при выборе "очистить результаты" (после поиска без опции) удляются не все слои
+        if self.dlg.clear_results_chbx.isChecked():
+            layers = self.clear_results(self.get_layers_list())
+        else:
+            layers = [layer for layer in self.get_layers_list() if not layer.name().startswith('results_')]
         for layer in layers:
             if layer.source() == layer_path:
                 lyr = self.Geometry.get_layer(layer_path)
                 wkt = self.Geometry.get_geometry(lyr)
                 # TODO добавить поддержку минимальной облачности (аккуратно, во внутр. БД есть -9999)
-                sql = self.PSQL.querySet(self.dlg.cloud_pct_mx.value(), wkt)
+                sql = self.PSQL.querySet(self.Cloud_pct_control.get_mx_value(), wkt)
                 self.PSQL.loadSql('results_GE01', sql)
                 break
 
