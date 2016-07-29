@@ -26,16 +26,18 @@ from PyQt4.QtSql import *
 from qgis.core import *
 
 
-class Contrlos:
+class SyncedSlider:
 
-    def __init__(self, dialog):
-        self.dlg = dialog
+    def __init__(self, slider_obj, mx_box_obj, mn_box_obj=None):
 
-        # облачность (замыкаем слайдер на окошко ввода и наоборот)
-        self.dlg.cloud_pct_slider.valueChanged.connect(
-            lambda: self.dlg.cloud_pct_mx.setValue(self.dlg.cloud_pct_slider.value()))
-        self.dlg.cloud_pct_mx.valueChanged.connect(
-            lambda: self.dlg.cloud_pct_slider.setValue(self.dlg.cloud_pct_mx.value()))
+        self.mx_box_obj = mx_box_obj
+        self.slider_obj = slider_obj
 
-    # def slider_cloud_pct(self):
+        self.slider_obj.valueChanged.connect(
+            lambda: self.mx_box_obj.setValue(self.slider_obj.value()))
+        self.mx_box_obj.valueChanged.connect(
+            lambda: self.slider_obj.setValue(self.mx_box_obj.value()))
 
+    def get_mx_value(self):
+        curr_value = self.mx_box_obj.value()
+        return curr_value
