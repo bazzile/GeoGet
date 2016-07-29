@@ -246,10 +246,19 @@ class GeoGet:
                 combo.setCurrentIndex(0)
         combo.blockSignals(False)
 
+    def get_layers_list(self):
+        """Возвращает список открытых векторных полигональных слоёв (QgsVectorLayer objects)"""
+        # http://gis.stackexchange.com/questions/124866/how-to-identify-polygon-point-shapefiles-in-python/124870#124870
+        vector_type_index = 0
+        polygon_type_index = 2
+        layers = [layer for layer in self.iface.legendInterface().layers() if
+                  layer.type() == vector_type_index and layer.geometryType() == polygon_type_index]
+        return layers
+
     def get_layer_names(self):
         """ Загружаем список открытых слоёв в диалог "выбор контура (v_layer_list)."""
         layer_list = []
-        layers = self.iface.legendInterface().layers()
+        layers = self.get_layers_list()
         for layer in layers:
             layer_path = layer.source()
             # layer_name = os.path.basename(layer_path)
@@ -287,26 +296,30 @@ class GeoGet:
             self.iface.zoomToActiveLayer()
 
     def t_zoom2layer(self, layer_path):
-        layers = self.iface.legendInterface().layers()
+        layers = self.get_layers_list()
         for layer in layers:
             if layer.source() == layer_path:
                 self.iface.setActiveLayer(layer)
                 self.iface.zoomToActiveLayer()
-                #
-                # # выгрузка геометрии в textBox
-                # lyr = self.Geometry.get_layer(layer_path)
-                # geometry = self.Geometry.get_geometry(lyr)
-                # self.dlg.test_textBrowser.clear()
-                # self.dlg.test_textBrowser.append(str(geometry))
                 break
 
     def t_search_db(self, layer_path):
-        layers = self.iface.legendInterface().layers()
+        layers = self.clear_results(self.get_layers_list())
         for layer in layers:
             if layer.source() == layer_path:
                 lyr = self.Geometry.get_layer(layer_path)
                 wkt = self.Geometry.get_geometry(lyr)
                 # TODO добавить поддержку минимальной облачности (аккуратно, во внутр. БД есть -9999)
                 sql = self.PSQL.querySet(self.dlg.cloud_pct_mx.value(), wkt)
-                self.PSQL.loadSql('GE01', sql)
+                self.PSQL.loadSql('results_GE01', sql)
                 break
+
+    def clear_results(self, layer_list):
+        """Удаляет из реестра слоёв результаты предыдущего поиска"""
+        for layer in layer_list:
+            if layer.name().startswith('results_'):
+                QgsMapLayerRegistry.instance().removeMapLayer(layer.id())
+                layer_list.remove(layer)
+        return layer_list
+
+
