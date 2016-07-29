@@ -322,7 +322,8 @@ class GeoGet:
                 lyr = self.Geometry.get_layer(layer_path)
                 wkt = self.Geometry.get_geometry(lyr)
                 # TODO добавить поддержку минимальной облачности (аккуратно, во внутр. БД есть -9999)
-                sql = self.PSQL.querySet(self.Cloud_pct_control.get_mx_value(), wkt)
+                sql = self.PSQL.querySet(
+                    self.Cloud_pct_control.get_mx_value(), self.Angle_control.get_mx_value(), wkt)
                 self.PSQL.loadSql('results_GE01', sql)
                 break
 

@@ -36,12 +36,13 @@ class PSQL:
         self.schema = ""
 
     def querySet(
-            self, cloud_pct_mx, wkt, crs='4326', schema='geoarchive', table='imagery', geom_field='geom'):
+            self, cloud_pct_mx, off_nadir_mx, wkt, crs='4326', schema='geoarchive', table='imagery', geom_field='geom'):
         # TODO подумать, как выделить WHERE часть отдельно
         cloud_cond = " AND cloud_pct <= " + str(cloud_pct_mx)
+        off_nadir_cond = " AND off_nadir <= " + str(off_nadir_mx)
         sql = "SELECT *" + ", row_number() OVER () AS ogc_fid FROM " + schema + \
               "." + table + " WHERE ST_Intersects(" + geom_field + ", ST_GeomFromText('" + wkt + "', " + crs + "))" + \
-              cloud_cond
+              cloud_cond + off_nadir_cond
         return sql
 
     # TODO реализовать загрузку в одну строку через iface, делать запрос по *, заменить ogc_fid
