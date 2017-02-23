@@ -33,6 +33,7 @@ from geometry import Geomerty
 from PSQL import PSQL
 from controls import *
 
+
 class GeoGet:
     """QGIS Plugin Implementation."""
 
@@ -185,7 +186,7 @@ class GeoGet:
 
         # TODO удалить этот импорт
         self.iface.addVectorLayer(
-            os.path.join(os.path.dirname(__file__), r"testData\test_polygon.shp"), 'test_poly_2', 'ogr')
+            os.path.join(os.path.dirname(__file__), r"testData\test_polygon.shp"), 'Test_Polygon', 'ogr')
 
         self.populateComboBox(
             self.dlg.v_layer_list, self.get_layer_names(), u'Выберите слой', True)
