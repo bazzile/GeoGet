@@ -184,8 +184,8 @@ class GeoGet:
         """Make the GUI live."""
 
         # TODO удалить этот импорт
-        self.iface.addVectorLayer(r"E:\!DB_test\test_poly_2.shp", 'test_poly_2', 'ogr')
-
+        self.iface.addVectorLayer(
+            os.path.join(os.path.dirname(__file__), r"testData\test_polygon.shp"), 'test_poly_2', 'ogr')
 
         self.populateComboBox(
             self.dlg.v_layer_list, self.get_layer_names(), u'Выберите слой', True)
