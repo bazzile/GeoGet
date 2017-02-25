@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>484</width>
-    <height>593</height>
+    <width>359</width>
+    <height>576</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -108,8 +108,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>434</width>
-            <height>423</height>
+            <width>309</width>
+            <height>406</height>
            </rect>
           </property>
           <attribute name="label">
@@ -530,7 +530,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="GE1_chbox">
+                  <widget class="QCheckBox" name="GE01_chbox">
                    <property name="text">
                     <string>GeoEye-1</string>
                    </property>

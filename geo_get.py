@@ -323,9 +323,13 @@ class GeoGet:
                 lyr = self.Geometry.get_layer(layer_path)
                 wkt = self.Geometry.get_geometry(lyr)
                 # TODO добавить поддержку минимальной облачности (аккуратно, во внутр. БД есть -9999)
+                sat_set = self.get_sat_set()
                 sql = self.PSQL.querySet(
-                    self.Cloud_pct_control.get_mx_value(), self.Angle_control.get_mx_value(), wkt)
+                    self.Cloud_pct_control.get_mx_value(), self.Angle_control.get_mx_value(), sat_set, wkt)
                 self.PSQL.loadSql('results_DG', sql)
+                # загрузка готового стиля для слоя с результатами
+                shape_lyr = self.iface.activeLayer()
+                shape_lyr.loadNamedStyle(os.path.join(os.path.dirname(os.path.join(__file__)), 'Shape_Style.qml'))
                 break
 
     def clear_results(self, layer_list):
@@ -335,5 +339,20 @@ class GeoGet:
                 QgsMapLayerRegistry.instance().removeMapLayer(layer.id())
                 layer_list.remove(layer)
         return layer_list
+
+    def get_sat_set(self):
+        sat_set = set()
+        if self.dlg.WV3_chbox.isChecked():
+            sat_set.add('WV03')
+        if self.dlg.WV2_chbox.isChecked():
+            sat_set.add('WV02')
+        if self.dlg.WV1_chbox.isChecked():
+            sat_set.add('WV01')
+        if self.dlg.GE01_chbox.isChecked():
+            sat_set.add('GE01')
+        if self.dlg.QB01_chbox.isChecked():
+            sat_set.add('QB02')
+        return sat_set
+
 
 
