@@ -36,7 +36,7 @@
           <enum>QFrame::NoFrame</enum>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <property name="tabSpacing">
           <number>6</number>
@@ -46,8 +46,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>434</width>
-            <height>423</height>
+            <width>309</width>
+            <height>406</height>
            </rect>
           </property>
           <attribute name="label">
@@ -185,7 +185,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QDateEdit" name="dateEdit">
+                <widget class="QDateEdit" name="min_dateEdit">
                  <property name="date">
                   <date>
                    <year>2016</year>
@@ -209,7 +209,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QDateEdit" name="dateEdit_2">
+                <widget class="QDateEdit" name="max_dateEdit">
                  <property name="date">
                   <date>
                    <year>2017</year>

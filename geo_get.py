@@ -324,12 +324,14 @@ class GeoGet:
                 wkt = self.Geometry.get_geometry(lyr)
                 # TODO добавить поддержку минимальной облачности (аккуратно, во внутр. БД есть -9999)
                 sat_set = self.get_sat_set()
+                dates_dict = self.get_date_range()
                 sql = self.PSQL.querySet(
-                    self.Cloud_pct_control.get_mx_value(), self.Angle_control.get_mx_value(), sat_set, wkt)
+                    dates_dict, self.Cloud_pct_control.get_mx_value(), self.Angle_control.get_mx_value(), sat_set, wkt)
                 self.PSQL.loadSql('results_DG', sql)
                 # загрузка готового стиля для слоя с результатами
                 shape_lyr = self.iface.activeLayer()
                 shape_lyr.loadNamedStyle(os.path.join(os.path.dirname(os.path.join(__file__)), 'Shape_Style.qml'))
+                self.dlg.test_textBrowser.setText(str(self.get_date_range()))
                 break
 
     def clear_results(self, layer_list):
@@ -353,6 +355,11 @@ class GeoGet:
         if self.dlg.QB01_chbox.isChecked():
             sat_set.add('QB02')
         return sat_set
+
+    def get_date_range(self):
+        dates_dict = {'min_date': str(self.dlg.min_dateEdit.date().toPyDate()),
+                      'max_date': str(self.dlg.max_dateEdit.date().toPyDate())}
+        return dates_dict
 
 
 

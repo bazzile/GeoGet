@@ -36,8 +36,10 @@ class PSQL:
         self.schema = ""
 
     def querySet(
-            self, cloud_pct_mx, off_nadir_mx, sat_set, wkt, crs='4326', schema='vendors', table='dg', geom_field='geom'):
+            self, dates_dict, cloud_pct_mx, off_nadir_mx, sat_set, wkt, crs='4326', schema='vendors', table='dg', geom_field='geom'):
         # TODO подумать, как выделить WHERE часть отдельно
+        date_cond = " AND acqdate < " + "'" + dates_dict['max_date'] + "'" \
+                    + " AND acqdate > " + "'" + dates_dict['min_date'] + "'"
         cloud_cond = " AND cloudcover <= " + str(cloud_pct_mx)
         off_nadir_cond = " AND mxoffnadir <= " + str(off_nadir_mx)
         # TODO добавить ошибку if platform is null
@@ -45,7 +47,7 @@ class PSQL:
         sat_cond = " AND platform IN (" + ', '.join(["'%s'" %item for item in sat_set]) + ")"
         sql = "SELECT *" + ", row_number() OVER () AS ogc_fid FROM " + schema + \
               "." + table + " WHERE ST_Intersects(" + geom_field + ", ST_GeomFromText('" + wkt + "', " + crs + "))" + \
-              cloud_cond + off_nadir_cond + sat_cond + " LIMIT 100"
+              cloud_cond + off_nadir_cond + sat_cond + date_cond + " LIMIT 100"
         return sql
 
     # TODO реализовать загрузку в одну строку через iface, делать запрос по *, заменить ogc_fid
