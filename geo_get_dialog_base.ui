@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>433</width>
-    <height>460</height>
+    <width>357</width>
+    <height>489</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,8 +46,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>383</width>
-            <height>290</height>
+            <width>307</width>
+            <height>319</height>
            </rect>
           </property>
           <attribute name="label">
@@ -102,18 +102,14 @@
             <widget class="QTextBrowser" name="test_textBrowser"/>
            </item>
           </layout>
-          <zorder>v_layer_list</zorder>
-          <zorder>test_textBrowser</zorder>
-          <zorder>horizontalLayoutWidget</zorder>
-          <zorder>in_browse_btn</zorder>
          </widget>
-         <widget class="QWidget" name="DateSlot">
+         <widget class="QWidget" name="ImagerySlot">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>383</width>
-            <height>290</height>
+            <width>307</width>
+            <height>319</height>
            </rect>
           </property>
           <attribute name="label">
@@ -213,6 +209,13 @@
             </layout>
            </item>
            <item>
+            <widget class="Line" name="line_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
             <layout class="QVBoxLayout" name="Angle_verticalLayout">
              <item>
               <layout class="QHBoxLayout" name="Angle_horizontalLayout">
@@ -310,6 +313,201 @@
              </item>
             </layout>
            </item>
+           <item>
+            <widget class="Line" name="line_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <spacer name="horizontalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Спутники</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <spacer name="horizontalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="Satellites_horizontalLayout">
+               <item>
+                <layout class="QVBoxLayout" name="Pan_verticalLayout">
+                 <item>
+                  <widget class="QCheckBox" name="WV3_chbox">
+                   <property name="text">
+                    <string>WorldView-3</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="WV2_chbox">
+                   <property name="text">
+                    <string>WorldView-2</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="GE1_chbox">
+                   <property name="text">
+                    <string>GeoEye-1</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="QB01_chbox">
+                   <property name="text">
+                    <string>QuickBird</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_2">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="Line" name="line">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="MS_verticalLayout">
+                 <item>
+                  <widget class="QCheckBox" name="WV1_chbox">
+                   <property name="text">
+                    <string>WorldView-1</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_10">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
           </layout>
          </widget>
         </widget>
@@ -344,8 +542,8 @@
       <widget class="QDialogButtonBox" name="button_box">
        <property name="geometry">
         <rect>
-         <x>100</x>
-         <y>180</y>
+         <x>150</x>
+         <y>430</y>
          <width>156</width>
          <height>23</height>
         </rect>
