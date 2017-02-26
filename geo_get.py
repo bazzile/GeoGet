@@ -327,9 +327,16 @@ class GeoGet:
                 dates_dict = self.get_date_range()
                 sql = self.PSQL.querySet(
                     dates_dict, self.Cloud_pct_control.get_mx_value(), self.Angle_control.get_mx_value(), sat_set, wkt)
-                self.PSQL.loadSql('results_DG', sql)
+                result_layer_name = 'results_DG'
+                self.PSQL.loadSql(result_layer_name, sql)
                 # загрузка готового стиля для слоя с результатами
-                shape_lyr = self.iface.activeLayer()
+                # shape_lyr = self.iface.activeLayer()
+                shape_lyr = None
+                for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+                    if lyr.name() == result_layer_name:
+                        shape_lyr = lyr
+                        break
+                # shape_lyr = QgsMapLayerRegistry.instance().mapLayerByName("results_DG")
                 shape_lyr.loadNamedStyle(os.path.join(os.path.dirname(os.path.join(__file__)), 'Shape_Style.qml'))
                 self.dlg.test_textBrowser.setText(str(self.get_date_range()))
                 break
