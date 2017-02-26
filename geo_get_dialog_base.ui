@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
-    <height>637</height>
+    <width>424</width>
+    <height>662</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,8 +46,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>432</width>
-            <height>467</height>
+            <width>374</width>
+            <height>492</height>
            </rect>
           </property>
           <attribute name="label">
@@ -108,14 +108,14 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>432</width>
-            <height>467</height>
+            <width>374</width>
+            <height>492</height>
            </rect>
           </property>
           <attribute name="label">
            <string>Параметры поиска</string>
           </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
             <widget class="Line" name="line_5">
              <property name="orientation">
@@ -512,7 +512,7 @@
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_4">
+                <spacer name="horizontalSpacer_8">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -677,23 +677,57 @@
                </item>
               </layout>
              </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="stereo_chbox">
+                 <property name="font">
+                  <font>
+                   <italic>true</italic>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>только стерео</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_13">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
             </layout>
            </item>
           </layout>
           <zorder></zorder>
-          <zorder></zorder>
-          <zorder>horizontalLayoutWidget</zorder>
           <zorder>line_2</zorder>
           <zorder>line_3</zorder>
-          <zorder>horizontalSpacer_9</zorder>
-          <zorder>horizontalSpacer_10</zorder>
-          <zorder>horizontalLayoutWidget_2</zorder>
-          <zorder>horizontalLayoutWidget_3</zorder>
           <zorder>line_4</zorder>
           <zorder>line_5</zorder>
           <zorder></zorder>
-          <zorder>horizontalLayoutWidget_4</zorder>
-          <zorder>horizontalLayoutWidget_5</zorder>
          </widget>
         </widget>
        </item>

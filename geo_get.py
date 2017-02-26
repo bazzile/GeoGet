@@ -185,8 +185,9 @@ class GeoGet:
         """Make the GUI live."""
 
         # TODO удалить этот импорт
-        self.iface.addVectorLayer(
+        lyr = self.iface.addVectorLayer(
             os.path.join(os.path.dirname(__file__), r"testData\test_polygon.shp"), 'Test_Polygon', 'ogr')
+        lyr.loadNamedStyle(os.path.join(os.path.dirname(os.path.join(__file__)), 'testData', 'Test_Polygon_Style.qml'))
 
         self.populateComboBox(
             self.dlg.v_layer_list, self.get_layer_names(), u'Выберите слой', True)
@@ -196,7 +197,6 @@ class GeoGet:
             lambda: self.dlg.parameters_toolBox.setCurrentIndex(int(self.dlg.parameters_toolBox.currentIndex()) + 1))
 
 
-
         # TODO удалить этот тест-блок
         # layer = self.Geometry.get_layer("test_poly")
         # geometry = self.Geometry.get_geometry(layer)
@@ -204,9 +204,6 @@ class GeoGet:
         # if str(self.dlg.v_layer_list.currentText()) != u'Выберите слой' or None:
         self.dlg.v_layer_list.activated.connect(lambda: self.zoom2layer(str(self.dlg.v_layer_list.currentText())))
         self.dlg.search_btn.clicked.connect(lambda: self.t_search_db(str(self.dlg.v_layer_list.currentText())))
-
-
-
 
 
     def unload(self):
@@ -325,8 +322,10 @@ class GeoGet:
                 # TODO добавить поддержку минимальной облачности (аккуратно, во внутр. БД есть -9999)
                 sat_set = self.get_sat_set()
                 dates_dict = self.get_date_range()
+                stereo_flag = self.get_stereo_flag()
                 sql = self.PSQL.querySet(
-                    dates_dict, self.Cloud_pct_control.get_mx_value(), self.Angle_control.get_mx_value(), sat_set, wkt)
+                    dates_dict, self.Cloud_pct_control.get_mx_value(), self.Angle_control.get_mx_value(), sat_set,
+                    stereo_flag, wkt)
                 result_layer_name = 'results_DG'
                 self.PSQL.loadSql(result_layer_name, sql)
                 # загрузка готового стиля для слоя с результатами
@@ -337,7 +336,8 @@ class GeoGet:
                         shape_lyr = lyr
                         break
                 # shape_lyr = QgsMapLayerRegistry.instance().mapLayerByName("results_DG")
-                shape_lyr.loadNamedStyle(os.path.join(os.path.dirname(os.path.join(__file__)), 'Shape_Style.qml'))
+                shape_lyr.loadNamedStyle(os.path.join(
+                    os.path.dirname(os.path.join(__file__)), 'testData', 'Shape_Style.qml'))
                 self.dlg.test_textBrowser.setText(str(self.get_date_range()))
                 break
 
@@ -368,5 +368,12 @@ class GeoGet:
                       'max_date': str(self.dlg.max_dateEdit.date().toPyDate())}
         return dates_dict
 
+
+    def get_stereo_flag(self):
+        if self.dlg.stereo_chbox.isChecked():
+            stereo_flag = True
+        else:
+            stereo_flag = False
+        return stereo_flag
 
 

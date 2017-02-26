@@ -36,7 +36,8 @@ class PSQL:
         self.schema = ""
 
     def querySet(
-            self, dates_dict, cloud_pct_mx, off_nadir_mx, sat_set, wkt, crs='4326', schema='vendors', table='dg', geom_field='geom'):
+            self, dates_dict, cloud_pct_mx, off_nadir_mx, sat_set, stereo_flag, wkt,
+            crs='4326', schema='vendors', table='dg', geom_field='geom'):
         # TODO подумать, как выделить WHERE часть отдельно
         date_cond = " AND acqdate < " + "'" + dates_dict['max_date'] + "'" \
                     + " AND acqdate > " + "'" + dates_dict['min_date'] + "'"
@@ -45,10 +46,11 @@ class PSQL:
         # TODO добавить ошибку if platform is null
         # Добавляем кавычки, чтобы platform/sat_set не выдавал ошибку (no such table)
         sat_cond = " AND platform IN (" + ', '.join(["'%s'" %item for item in sat_set]) + ")"
+        stereo_cond = " AND stereopair <> 'NONE'" if stereo_flag is True else ""
         # Если необходим уникальный ключ (ogc_fid): sql = "SELECT *" + ", row_number() OVER () AS ogc_fid FROM " + schema + \
         sql = "SELECT * FROM " + schema + \
               "." + table + " WHERE ST_Intersects(" + geom_field + ", ST_GeomFromText('" + wkt + "', " + crs + "))" + \
-              cloud_cond + off_nadir_cond + sat_cond + date_cond + " LIMIT 100"
+              cloud_cond + off_nadir_cond + sat_cond + stereo_cond + date_cond + " LIMIT 100"
         return sql
 
     # TODO реализовать загрузку в одну строку через iface, делать запрос по *, заменить ogc_fid
