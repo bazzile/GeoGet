@@ -45,7 +45,8 @@ class PSQL:
         # TODO добавить ошибку if platform is null
         # Добавляем кавычки, чтобы platform/sat_set не выдавал ошибку (no such table)
         sat_cond = " AND platform IN (" + ', '.join(["'%s'" %item for item in sat_set]) + ")"
-        sql = "SELECT *" + ", row_number() OVER () AS ogc_fid FROM " + schema + \
+        # Если необходим уникальный ключ (ogc_fid): sql = "SELECT *" + ", row_number() OVER () AS ogc_fid FROM " + schema + \
+        sql = "SELECT * FROM " + schema + \
               "." + table + " WHERE ST_Intersects(" + geom_field + ", ST_GeomFromText('" + wkt + "', " + crs + "))" + \
               cloud_cond + off_nadir_cond + sat_cond + date_cond + " LIMIT 100"
         return sql
@@ -55,7 +56,8 @@ class PSQL:
     def loadSql(self, layerName, sql):
         uri = QgsDataSourceURI()
         uri.setConnection("ws008", "5432", "innoter", "postgres", "postgres")
-        uri.setDataSource("", "(" + sql + ")", "geom", "", "ogc_fid")
+        # Если необходим уникальный ключ (ogc_fid): uri.setDataSource("", "(" + sql + ")", "geom", "", "ogc_fid")
+        uri.setDataSource("", "(" + sql + ")", "geom", "", "gid")
         vlayer = QgsVectorLayer(uri.uri(), layerName, "postgres")
         QgsMapLayerRegistry.instance().addMapLayer(vlayer)
 
