@@ -184,6 +184,11 @@ class GeoGet:
     def populateGui(self):
         """Make the GUI live."""
 
+        # перепроецируем карту в Web Mercator
+        if self.iface.mapCanvas().mapRenderer().hasCrsTransformEnabled():
+            my_crs = QgsCoordinateReferenceSystem(3785, QgsCoordinateReferenceSystem.EpsgCrsId)
+            self.iface.mapCanvas().mapRenderer().setDestinationCrs(my_crs)
+
         # TODO удалить этот импорт
         lyr = self.iface.addVectorLayer(
             os.path.join(os.path.dirname(__file__), r"testData\test_polygon.shp"), 'Test_Polygon', 'ogr')
