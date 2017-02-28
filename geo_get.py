@@ -207,9 +207,10 @@ class GeoGet:
         # geometry = self.Geometry.get_geometry(layer)
         # self.dlg.test_textBrowser.append(str(geometry))
         # if str(self.dlg.v_layer_list.currentText()) != u'Выберите слой' or None:
-        self.dlg.v_layer_list.activated.connect(lambda: self.zoom2layer(str(self.dlg.v_layer_list.currentText())))
-        self.dlg.search_btn.clicked.connect(lambda: self.t_search_db(str(self.dlg.v_layer_list.currentText())))
-
+        self.dlg.v_layer_list.activated.connect(
+            lambda: self.zoom2layer(self.dlg.v_layer_list.currentText().encode('utf-8').decode('utf-8')))
+        self.dlg.search_btn.clicked.connect(
+            lambda: self.t_search_db(self.dlg.v_layer_list.currentText().encode('utf-8').decode('utf-8')))
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -380,5 +381,4 @@ class GeoGet:
         else:
             stereo_flag = False
         return stereo_flag
-
 

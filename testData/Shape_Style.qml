@@ -103,9 +103,6 @@
     <edittype widgetv2type="TextEdit" name="imagebands">
       <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
     </edittype>
-    <edittype widgetv2type="TextEdit" name="ogc_fid">
-      <widgetv2config IsMultiline="0" fieldEditable="1" constraint="" UseHtml="0" labelOnTop="0" constraintDescription="" notNull="0"/>
-    </edittype>
   </edittypes>
   <renderer-v2 forceraster="0" symbollevels="0" type="singleSymbol" enableorderby="0">
     <symbols>
@@ -169,7 +166,7 @@
     <property key="labeling/distMapUnitScale" value="0,0,0,0,0,0"/>
     <property key="labeling/drawLabels" value="false"/>
     <property key="labeling/enabled" value="false"/>
-    <property key="labeling/fieldName" value=""/>
+    <property key="labeling/fieldName" value="catalogid"/>
     <property key="labeling/fitInPolygonOnly" value="false"/>
     <property key="labeling/fontCapitals" value="0"/>
     <property key="labeling/fontFamily" value="MS Shell Dlg 2"/>
@@ -186,7 +183,7 @@
     <property key="labeling/fontWeight" value="50"/>
     <property key="labeling/fontWordSpacing" value="0"/>
     <property key="labeling/formatNumbers" value="false"/>
-    <property key="labeling/isExpression" value="true"/>
+    <property key="labeling/isExpression" value="false"/>
     <property key="labeling/labelOffsetInMapUnits" value="true"/>
     <property key="labeling/labelOffsetMapUnitScale" value="0,0,0,0,0,0"/>
     <property key="labeling/labelPerPart" value="false"/>
@@ -313,6 +310,7 @@
   <SingleCategoryDiagramRenderer diagramType="Histogram" sizeLegend="0" attributeLegend="1">
     <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" sizeScale="0,0,0,0,0,0" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" lineSizeScale="0,0,0,0,0,0" sizeType="MM" lineSizeType="MM" minScaleDenominator="inf">
       <fontProperties description="MS Shell Dlg 2,7.5,-1,5,50,0,0,0,0,0" style=""/>
+      <attribute field="" color="#000000" label=""/>
     </DiagramCategory>
     <symbol alpha="1" clip_to_extent="1" type="marker" name="sizeSymbol">
       <layer pass="0" class="SimpleMarker" locked="0">
@@ -342,7 +340,7 @@
   <aliases>
     <alias field="gid" index="0" name=""/>
     <alias field="catalogid" index="1" name=""/>
-    <alias field="acqdate" index="2" name=""/>
+    <alias field="acqdate" index="2" name="Дата съёмки"/>
     <alias field="mnoffnadir" index="3" name=""/>
     <alias field="mxoffnadir" index="4" name=""/>
     <alias field="avoffnadir" index="5" name=""/>
@@ -374,7 +372,6 @@
     <alias field="x4" index="31" name=""/>
     <alias field="y4" index="32" name=""/>
     <alias field="imagebands" index="33" name=""/>
-    <alias field="ogc_fid" index="34" name=""/>
   </aliases>
   <excludeAttributesWMS/>
   <excludeAttributesWFS/>
@@ -415,7 +412,6 @@
       <column width="-1" hidden="0" type="field" name="x4"/>
       <column width="-1" hidden="0" type="field" name="y4"/>
       <column width="-1" hidden="0" type="field" name="imagebands"/>
-      <column width="-1" hidden="0" type="field" name="ogc_fid"/>
       <column width="-1" hidden="1" type="actions"/>
     </columns>
   </attributetableconfig>
