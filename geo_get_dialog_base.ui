@@ -722,7 +722,6 @@
             </layout>
            </item>
           </layout>
-          <zorder></zorder>
           <zorder>line_2</zorder>
           <zorder>line_3</zorder>
           <zorder>line_4</zorder>
@@ -737,22 +736,84 @@
       <attribute name="title">
        <string>Настройки</string>
       </attribute>
-      <widget class="QCheckBox" name="clear_results_chbx">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>180</y>
-         <width>251</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Очищать результаты  предыдущего поиска</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QgsCollapsibleGroupBox" name="Search_settings_mGroupBox">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="title">
+          <string>Настройки поиска</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QCheckBox" name="clear_results_chbx">
+            <property name="text">
+             <string>Очищать результаты предыдущего поиска</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="open_attr_form_chbox">
+            <property name="text">
+             <string>Открывать таблицу атрибутов</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QgsCollapsibleGroupBox" name="General_settings_mGroupBox">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="title">
+          <string>Общие настройки</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QCheckBox" name="tweak_qgis_chbox">
+            <property name="text">
+             <string>Настроить QGIS</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>390</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
@@ -809,6 +870,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsCollapsibleGroupBox</class>
+   <extends></extends>
+   <header>qgis.gui</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

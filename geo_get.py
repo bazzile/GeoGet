@@ -203,6 +203,11 @@ class GeoGet:
 
 
         # TODO удалить этот тест-блок
+
+        self.dlg.tweak_qgis_chbox.toggled.connect(
+            lambda: (QSettings().setValue('/qgis/dockAttributeTable', True),
+                     QSettings().setValue('/qgis/attributeTableBehaviour', 1)
+        ))
         # layer = self.Geometry.get_layer("test_poly")
         # geometry = self.Geometry.get_geometry(layer)
         # self.dlg.test_textBrowser.append(str(geometry))
@@ -345,6 +350,9 @@ class GeoGet:
                 # shape_lyr = QgsMapLayerRegistry.instance().mapLayerByName("results_DG")
                 shape_lyr.loadNamedStyle(os.path.join(
                     os.path.dirname(os.path.join(__file__)), 'testData', 'Shape_Style.qml'))
+
+                if self.dlg.open_attr_form_chbox.isChecked():
+                    self.iface.showAttributeTable(shape_lyr)
                 self.dlg.test_textBrowser.setText(str(self.get_date_range()))
                 break
 
