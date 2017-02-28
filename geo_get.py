@@ -283,14 +283,15 @@ class GeoGet:
         return layer_list
 
     def select_input_file(self):
-        if self.last_used_path == None:
-            filename = QFileDialog.getOpenFileName(
-                self.dlg, u"Укажите файл контура ", "", u'Полигоны (*.shp *.kml *tab *geojson)')
+        path = self.last_used_path if self.last_used_path is not None else ""
+        filename = QFileDialog.getOpenFileName(
+            self.dlg, u"Укажите файл контура ", path,
+            u'Полигоны (*.shp *.kml *tab *geojson)')
+        if not filename:
+            return None
+        else:
             # записываем в self.last_used_path последний использовавшийся каталог
             self.last_used_path = os.path.dirname(filename)
-        else:
-            filename = QFileDialog.getOpenFileName(
-                self.dlg, u"Укажите файл контура ", self.last_used_path, u'Полигоны (*.shp *.kml *tab *geojson)')
         # TODO отображать в списке только имя контура без пути и расшир (реализовать через словарь? (т.к. нужен и путь)
         if filename:
             self.dlg.v_layer_list.insertItem(self.dlg.v_layer_list.count(), filename)
