@@ -13,9 +13,21 @@
   <property name="windowTitle">
    <string>Innoter GeoGet</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(240, 240, 240)</string>
+     </property>
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -25,12 +37,56 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
+        <widget class="QgsCollapsibleGroupBox" name="Search_settings_mGroupBox_2" native="true">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="title" stdset="0">
+          <string>Настройки поиска</string>
+         </property>
+         <property name="flat" stdset="0">
+          <bool>true</bool>
+         </property>
+         <property name="checkable" stdset="0">
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item>
+           <widget class="QCheckBox" name="clear_results_chbx_2">
+            <property name="text">
+             <string>поиск в архиве Иннотер</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="open_attr_form_chbox_2">
+            <property name="text">
+             <string>поиск в БД операторов</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <widget class="QToolBox" name="parameters_toolBox">
          <property name="enabled">
           <bool>true</bool>
          </property>
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -46,8 +102,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>374</width>
-            <height>492</height>
+            <width>382</width>
+            <height>451</height>
            </rect>
           </property>
           <attribute name="label">
@@ -108,8 +164,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>374</width>
-            <height>492</height>
+            <width>382</width>
+            <height>451</height>
            </rect>
           </property>
           <attribute name="label">
@@ -173,18 +229,18 @@
                </item>
                <item>
                 <widget class="QDateEdit" name="min_dateEdit">
+                 <property name="displayFormat">
+                  <string>d.MM.yyyy</string>
+                 </property>
+                 <property name="calendarPopup">
+                  <bool>true</bool>
+                 </property>
                  <property name="date">
                   <date>
                    <year>2016</year>
                    <month>1</month>
                    <day>1</day>
                   </date>
-                 </property>
-                 <property name="displayFormat">
-                  <string>d.MM.yyyy</string>
-                 </property>
-                 <property name="calendarPopup">
-                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -197,18 +253,18 @@
                </item>
                <item>
                 <widget class="QDateEdit" name="max_dateEdit">
+                 <property name="displayFormat">
+                  <string>d.MM.yyyy</string>
+                 </property>
+                 <property name="calendarPopup">
+                  <bool>true</bool>
+                 </property>
                  <property name="date">
                   <date>
                    <year>2017</year>
                    <month>1</month>
                    <day>1</day>
                   </date>
-                 </property>
-                 <property name="displayFormat">
-                  <string>d.MM.yyyy</string>
-                 </property>
-                 <property name="calendarPopup">
-                  <bool>true</bool>
                  </property>
                 </widget>
                </item>
@@ -738,20 +794,23 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_7">
        <item>
-        <widget class="QgsCollapsibleGroupBox" name="Search_settings_mGroupBox">
+        <widget class="QgsCollapsibleGroupBox" name="Search_settings_mGroupBox" native="true">
          <property name="font">
           <font>
            <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
-         <property name="title">
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="title" stdset="0">
           <string>Настройки поиска</string>
          </property>
-         <property name="flat">
+         <property name="flat" stdset="0">
           <bool>true</bool>
          </property>
-         <property name="checkable">
+         <property name="checkable" stdset="0">
           <bool>false</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -776,17 +835,20 @@
         </widget>
        </item>
        <item>
-        <widget class="QgsCollapsibleGroupBox" name="General_settings_mGroupBox">
+        <widget class="QgsCollapsibleGroupBox" name="General_settings_mGroupBox" native="true">
          <property name="font">
           <font>
            <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
-         <property name="title">
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="title" stdset="0">
           <string>Общие настройки</string>
          </property>
-         <property name="flat">
+         <property name="flat" stdset="0">
           <bool>true</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">

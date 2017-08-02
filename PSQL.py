@@ -57,7 +57,7 @@ class PSQL:
     #  (нужно только если на выходе запроса нет ключевых полей) на vendor_id
     def loadSql(self, layerName, sql):
         uri = QgsDataSourceURI()
-        uri.setConnection("ws008", "5432", "innoter", "postgres", "postgres")
+        uri.setConnection("192.168.0.107", "5432", "innoter", "postgres", "postgres")
         # Если необходим уникальный ключ (ogc_fid): uri.setDataSource("", "(" + sql + ")", "geom", "", "ogc_fid")
         uri.setDataSource("", "(" + sql + ")", "geom", "", "gid")
         vlayer = QgsVectorLayer(uri.uri(), layerName, "postgres")

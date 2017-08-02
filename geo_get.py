@@ -66,6 +66,10 @@ class GeoGet:
         # Create the dialog (after translation) and keep reference
         self.dlg = GeoGetDialog()
 
+        # Добавление кнопки "свернуть"
+        # http://stackoverflow.com/questions/22187207/pyqt-dialogs-minimize-window-button-is-missing-in-osx
+        self.dlg.setWindowFlags(Qt.WindowMinimizeButtonHint)
+
         # Declare instance attributes
         self.actions = []
         self.menu = self.tr(u'&Innoter GeoGet')
@@ -185,14 +189,14 @@ class GeoGet:
         """Make the GUI live."""
 
         # перепроецируем карту в Web Mercator
-        if self.iface.mapCanvas().mapRenderer().hasCrsTransformEnabled():
-            my_crs = QgsCoordinateReferenceSystem(3785, QgsCoordinateReferenceSystem.EpsgCrsId)
-            self.iface.mapCanvas().mapRenderer().setDestinationCrs(my_crs)
+        # if self.iface.mapCanvas().mapRenderer().hasCrsTransformEnabled():
+        #     my_crs = QgsCoordinateReferenceSystem(3785, QgsCoordinateReferenceSystem.EpsgCrsId)
+        #     self.iface.mapCanvas().mapRenderer().setDestinationCrs(my_crs)
 
         # TODO удалить этот импорт
-        lyr = self.iface.addVectorLayer(
-            os.path.join(os.path.dirname(__file__), r"testData\test_polygon.shp"), 'Test_Polygon', 'ogr')
-        lyr.loadNamedStyle(os.path.join(os.path.dirname(os.path.join(__file__)), 'testData', 'Test_Polygon_Style.qml'))
+        # lyr = self.iface.addVectorLayer(
+        #     os.path.join(os.path.dirname(__file__), r"testData\test_polygon.shp"), 'Test_Polygon', 'ogr')
+        # lyr.loadNamedStyle(os.path.join(os.path.dirname(os.path.join(__file__)), 'testData', 'Test_Polygon_Style.qml'))
 
         self.populateComboBox(
             self.dlg.v_layer_list, self.get_layer_names(), u'Выберите слой', True)
@@ -383,11 +387,9 @@ class GeoGet:
                       'max_date': str(self.dlg.max_dateEdit.date().toPyDate())}
         return dates_dict
 
-
     def get_stereo_flag(self):
         if self.dlg.stereo_chbox.isChecked():
             stereo_flag = True
         else:
             stereo_flag = False
         return stereo_flag
-
