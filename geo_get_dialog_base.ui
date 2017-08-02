@@ -92,7 +92,7 @@
           <enum>QFrame::NoFrame</enum>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="tabSpacing">
           <number>6</number>
@@ -229,6 +229,9 @@
                </item>
                <item>
                 <widget class="QDateEdit" name="min_dateEdit">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: white</string>
+                 </property>
                  <property name="displayFormat">
                   <string>d.MM.yyyy</string>
                  </property>
@@ -253,6 +256,9 @@
                </item>
                <item>
                 <widget class="QDateEdit" name="max_dateEdit">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: white</string>
+                 </property>
                  <property name="displayFormat">
                   <string>d.MM.yyyy</string>
                  </property>
@@ -335,6 +341,12 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="cloud_pct_mn">
+                 <property name="autoFillBackground">
+                  <bool>false</bool>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: white</string>
+                 </property>
                  <property name="maximum">
                   <number>100</number>
                  </property>
@@ -349,6 +361,9 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="cloud_pct_mx">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: white</string>
+                 </property>
                  <property name="suffix">
                   <string>%</string>
                  </property>
@@ -464,6 +479,9 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="angle_mn">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: white</string>
+                 </property>
                  <property name="maximum">
                   <number>100</number>
                  </property>
@@ -478,6 +496,9 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="angle_mx">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: white</string>
+                 </property>
                  <property name="suffix">
                   <string>°</string>
                  </property>
