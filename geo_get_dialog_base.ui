@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>424</width>
-    <height>662</height>
+    <width>391</width>
+    <height>795</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,7 +26,7 @@
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(240, 240, 240)</string>
+      <string notr="true"/>
      </property>
      <property name="currentIndex">
       <number>0</number>
@@ -45,7 +45,10 @@
           </font>
          </property>
          <property name="autoFillBackground">
-          <bool>false</bool>
+          <bool>true</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <property name="title" stdset="0">
           <string>Настройки поиска</string>
@@ -59,6 +62,9 @@
          <layout class="QVBoxLayout" name="verticalLayout_9">
           <item>
            <widget class="QCheckBox" name="clear_results_chbx_2">
+            <property name="autoFillBackground">
+             <bool>true</bool>
+            </property>
             <property name="text">
              <string>поиск в архиве Иннотер</string>
             </property>
@@ -72,143 +78,127 @@
             <property name="text">
              <string>поиск в БД операторов</string>
             </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QToolBox" name="parameters_toolBox">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="currentIndex">
-          <number>1</number>
-         </property>
-         <property name="tabSpacing">
-          <number>6</number>
-         </property>
-         <widget class="QWidget" name="GeometrySlot">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>382</width>
-            <height>451</height>
-           </rect>
-          </property>
-          <attribute name="label">
-           <string>Область поиска</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_4">
-           <item>
-            <widget class="QComboBox" name="v_layer_list">
-             <property name="focusPolicy">
-              <enum>Qt::WheelFocus</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QgsCollapsibleGroupBox" name="Search_settings_mGroupBox_3" native="true">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="autoFillBackground">
+             <bool>true</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="title" stdset="0">
+             <string>Поиск в архиве Иннотер</string>
+            </property>
+            <property name="flat" stdset="0">
+             <bool>true</bool>
+            </property>
+            <property name="checkable" stdset="0">
+             <bool>false</bool>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_10">
              <item>
-              <spacer name="horizontalSpacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="in_browse_btn">
-               <property name="text">
-                <string>...</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QTextBrowser" name="test_textBrowser"/>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="ImagerySlot">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>382</width>
-            <height>451</height>
-           </rect>
-          </property>
-          <attribute name="label">
-           <string>Параметры поиска</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <item>
-            <widget class="Line" name="line_5">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QVBoxLayout" name="Dates_VL">
-             <item>
-              <layout class="QHBoxLayout" name="Date_label_HL">
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
                <item>
-                <widget class="QLabel" name="label_5">
+                <widget class="QLabel" name="label_6">
+                 <property name="font">
+                  <font>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
                  <property name="text">
-                  <string>Период:</string>
+                  <string>Код проекта</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_14">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                <widget class="QComboBox" name="comboBox">
+                 <property name="sizeAdjustPolicy">
+                  <enum>QComboBox::AdjustToContents</enum>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
+                </widget>
                </item>
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="Dates_HL">
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
                <item>
-                <spacer name="horizontalSpacer_11">
+                <widget class="QLabel" name="label_7">
+                 <property name="font">
+                  <font>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Номер контракта</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBox_2">
+                 <property name="sizeAdjustPolicy">
+                  <enum>QComboBox::AdjustToContents</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QLabel" name="label_8">
+                 <property name="font">
+                  <font>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Номер инвойса</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBox_3">
+                 <property name="sizeAdjustPolicy">
+                  <enum>QComboBox::AdjustToContents</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="Dates_HL_2">
+               <item>
+                <widget class="QLabel" name="label_13">
+                 <property name="font">
+                  <font>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Загружен</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_20">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -221,22 +211,22 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QLabel" name="label_4">
+                <widget class="QLabel" name="label_10">
+                 <property name="font">
+                  <font>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
                  <property name="text">
                   <string>с</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QDateEdit" name="min_dateEdit">
+                <widget class="QDateEdit" name="min_dateEdit_2">
                  <property name="styleSheet">
                   <string notr="true">background-color: white</string>
-                 </property>
-                 <property name="displayFormat">
-                  <string>d.MM.yyyy</string>
-                 </property>
-                 <property name="calendarPopup">
-                  <bool>true</bool>
                  </property>
                  <property name="date">
                   <date>
@@ -245,25 +235,31 @@
                    <day>1</day>
                   </date>
                  </property>
+                 <property name="displayFormat">
+                  <string>d.MM.yyyy</string>
+                 </property>
+                 <property name="calendarPopup">
+                  <bool>true</bool>
+                 </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="label_2">
+                <widget class="QLabel" name="label_12">
+                 <property name="font">
+                  <font>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
                  <property name="text">
                   <string>по</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QDateEdit" name="max_dateEdit">
+                <widget class="QDateEdit" name="max_dateEdit_2">
                  <property name="styleSheet">
                   <string notr="true">background-color: white</string>
-                 </property>
-                 <property name="displayFormat">
-                  <string>d.MM.yyyy</string>
-                 </property>
-                 <property name="calendarPopup">
-                  <bool>true</bool>
                  </property>
                  <property name="date">
                   <date>
@@ -272,542 +268,774 @@
                    <day>1</day>
                   </date>
                  </property>
+                 <property name="displayFormat">
+                  <string>d.MM.yyyy</string>
+                 </property>
+                 <property name="calendarPopup">
+                  <bool>true</bool>
+                 </property>
                 </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_12">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
                </item>
               </layout>
              </item>
             </layout>
-           </item>
-           <item>
-            <widget class="Line" name="line_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QVBoxLayout" name="Cloud_VL">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_3">
-               <item>
-                <widget class="QLabel" name="cloud_label">
-                 <property name="text">
-                  <string>Допустимая облачность:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_19">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="Cloud_HL">
-               <item>
-                <spacer name="horizontalSpacer_3">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="cloud_pct_mn">
-                 <property name="autoFillBackground">
-                  <bool>false</bool>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: white</string>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_3">
-                 <property name="text">
-                  <string>-</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="cloud_pct_mx">
-                 <property name="styleSheet">
-                  <string notr="true">background-color: white</string>
-                 </property>
-                 <property name="suffix">
-                  <string>%</string>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                 <property name="value">
-                  <number>20</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_18">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QSlider" name="cloud_pct_slider">
-               <property name="mouseTracking">
-                <bool>false</bool>
-               </property>
-               <property name="maximum">
-                <number>100</number>
-               </property>
-               <property name="pageStep">
-                <number>25</number>
-               </property>
-               <property name="value">
-                <number>20</number>
-               </property>
-               <property name="sliderPosition">
-                <number>20</number>
-               </property>
-               <property name="tracking">
-                <bool>true</bool>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="invertedAppearance">
-                <bool>false</bool>
-               </property>
-               <property name="invertedControls">
-                <bool>false</bool>
-               </property>
-               <property name="tickPosition">
-                <enum>QSlider::TicksAbove</enum>
-               </property>
-               <property name="tickInterval">
-                <number>25</number>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="Line" name="line_3">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QVBoxLayout" name="Angles_VL">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_2">
-               <item>
-                <widget class="QLabel" name="angle_label">
-                 <property name="text">
-                  <string>Угол съёмки:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_17">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="Angles_HL">
-               <item>
-                <spacer name="horizontalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="angle_mn">
-                 <property name="styleSheet">
-                  <string notr="true">background-color: white</string>
-                 </property>
-                 <property name="maximum">
-                  <number>100</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_11">
-                 <property name="text">
-                  <string>-</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="angle_mx">
-                 <property name="styleSheet">
-                  <string notr="true">background-color: white</string>
-                 </property>
-                 <property name="suffix">
-                  <string>°</string>
-                 </property>
-                 <property name="maximum">
-                  <number>60</number>
-                 </property>
-                 <property name="singleStep">
-                  <number>1</number>
-                 </property>
-                 <property name="value">
-                  <number>30</number>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_15">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QSlider" name="angle_slider">
-               <property name="mouseTracking">
-                <bool>false</bool>
-               </property>
-               <property name="acceptDrops">
-                <bool>false</bool>
-               </property>
-               <property name="maximum">
-                <number>60</number>
-               </property>
-               <property name="pageStep">
-                <number>10</number>
-               </property>
-               <property name="value">
-                <number>30</number>
-               </property>
-               <property name="sliderPosition">
-                <number>30</number>
-               </property>
-               <property name="tracking">
-                <bool>true</bool>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="invertedAppearance">
-                <bool>false</bool>
-               </property>
-               <property name="invertedControls">
-                <bool>false</bool>
-               </property>
-               <property name="tickPosition">
-                <enum>QSlider::TicksAbove</enum>
-               </property>
-               <property name="tickInterval">
-                <number>10</number>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="Line" name="line_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QVBoxLayout" name="Satellites_VL">
-             <item>
-              <layout class="QHBoxLayout" name="Satellites_head_HL">
-               <item>
-                <widget class="QLabel" name="label">
-                 <property name="text">
-                  <string>Спутники:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_8">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="Satellites_HL">
-               <item>
-                <spacer name="horizontalSpacer_9">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="Satellites_horizontalLayout">
-                 <item>
-                  <layout class="QVBoxLayout" name="Pan_verticalLayout">
-                   <item>
-                    <widget class="QCheckBox" name="WV3_chbox">
-                     <property name="text">
-                      <string>WorldView-3</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="WV2_chbox">
-                     <property name="text">
-                      <string>WorldView-2</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="GE01_chbox">
-                     <property name="text">
-                      <string>GeoEye-1</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="QB01_chbox">
-                     <property name="text">
-                      <string>QuickBird</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <spacer name="verticalSpacer_2">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer_5">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="Line" name="line">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="horizontalSpacer_7">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <layout class="QVBoxLayout" name="MS_verticalLayout">
-                   <item>
-                    <widget class="QCheckBox" name="WV1_chbox">
-                     <property name="text">
-                      <string>WorldView-1</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <spacer name="verticalSpacer">
-                     <property name="orientation">
-                      <enum>Qt::Vertical</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>20</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_10">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_4">
-               <item>
-                <spacer name="horizontalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="stereo_chbox">
-                 <property name="font">
-                  <font>
-                   <italic>true</italic>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>только стерео</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_13">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </item>
-          </layout>
-          <zorder>line_2</zorder>
-          <zorder>line_3</zorder>
-          <zorder>line_4</zorder>
-          <zorder>line_5</zorder>
-          <zorder></zorder>
-         </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QgsCollapsibleGroupBox" name="Search_settings_mGroupBox_4" native="true">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="title" stdset="0">
+          <string>Поиск в БД операторов</string>
+         </property>
+         <property name="flat" stdset="0">
+          <bool>true</bool>
+         </property>
+         <property name="checkable" stdset="0">
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_11">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="Date_label_HL_2">
+            <item>
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Область поиска:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_16">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QComboBox" name="v_layer_list">
+            <property name="focusPolicy">
+             <enum>Qt::WheelFocus</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="in_browse_btn">
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="Line" name="line_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="Angles_VL">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QLabel" name="angle_label">
+                <property name="text">
+                 <string>Угол съёмки:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_17">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="Angles_HL">
+              <item>
+               <spacer name="horizontalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="angle_mn">
+                <property name="styleSheet">
+                 <string notr="true">background-color: white</string>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_11">
+                <property name="text">
+                 <string>-</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="angle_mx">
+                <property name="styleSheet">
+                 <string notr="true">background-color: white</string>
+                </property>
+                <property name="suffix">
+                 <string>°</string>
+                </property>
+                <property name="maximum">
+                 <number>60</number>
+                </property>
+                <property name="singleStep">
+                 <number>1</number>
+                </property>
+                <property name="value">
+                 <number>30</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_15">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QSlider" name="angle_slider">
+              <property name="mouseTracking">
+               <bool>false</bool>
+              </property>
+              <property name="acceptDrops">
+               <bool>false</bool>
+              </property>
+              <property name="maximum">
+               <number>60</number>
+              </property>
+              <property name="pageStep">
+               <number>10</number>
+              </property>
+              <property name="value">
+               <number>30</number>
+              </property>
+              <property name="sliderPosition">
+               <number>30</number>
+              </property>
+              <property name="tracking">
+               <bool>true</bool>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="invertedAppearance">
+               <bool>false</bool>
+              </property>
+              <property name="invertedControls">
+               <bool>false</bool>
+              </property>
+              <property name="tickPosition">
+               <enum>QSlider::TicksAbove</enum>
+              </property>
+              <property name="tickInterval">
+               <number>10</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="Line" name="line_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="Cloud_VL">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QLabel" name="cloud_label">
+                <property name="text">
+                 <string>Допустимая облачность:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_19">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="Cloud_HL">
+              <item>
+               <spacer name="horizontalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="cloud_pct_mn">
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: white</string>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>-</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="cloud_pct_mx">
+                <property name="styleSheet">
+                 <string notr="true">background-color: white</string>
+                </property>
+                <property name="suffix">
+                 <string>%</string>
+                </property>
+                <property name="maximum">
+                 <number>100</number>
+                </property>
+                <property name="value">
+                 <number>20</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_18">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QSlider" name="cloud_pct_slider">
+              <property name="mouseTracking">
+               <bool>false</bool>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="pageStep">
+               <number>25</number>
+              </property>
+              <property name="value">
+               <number>20</number>
+              </property>
+              <property name="sliderPosition">
+               <number>20</number>
+              </property>
+              <property name="tracking">
+               <bool>true</bool>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="invertedAppearance">
+               <bool>false</bool>
+              </property>
+              <property name="invertedControls">
+               <bool>false</bool>
+              </property>
+              <property name="tickPosition">
+               <enum>QSlider::TicksAbove</enum>
+              </property>
+              <property name="tickInterval">
+               <number>25</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="Line" name="line_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="Dates_VL">
+            <item>
+             <layout class="QHBoxLayout" name="Date_label_HL">
+              <item>
+               <widget class="QLabel" name="label_5">
+                <property name="text">
+                 <string>Период:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_14">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="Dates_HL">
+              <item>
+               <spacer name="horizontalSpacer_11">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string>с</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="min_dateEdit">
+                <property name="styleSheet">
+                 <string notr="true">background-color: white</string>
+                </property>
+                <property name="date">
+                 <date>
+                  <year>2016</year>
+                  <month>1</month>
+                  <day>1</day>
+                 </date>
+                </property>
+                <property name="displayFormat">
+                 <string>d.MM.yyyy</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>по</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateEdit" name="max_dateEdit">
+                <property name="styleSheet">
+                 <string notr="true">background-color: white</string>
+                </property>
+                <property name="date">
+                 <date>
+                  <year>2017</year>
+                  <month>1</month>
+                  <day>1</day>
+                 </date>
+                </property>
+                <property name="displayFormat">
+                 <string>d.MM.yyyy</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_12">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="Line" name="line_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="Satellites_VL">
+            <item>
+             <layout class="QHBoxLayout" name="Satellites_head_HL">
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Спутники:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_8">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="Satellites_HL">
+              <item>
+               <spacer name="horizontalSpacer_9">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="Satellites_horizontalLayout">
+                <item>
+                 <layout class="QVBoxLayout" name="Pan_verticalLayout">
+                  <item>
+                   <widget class="QCheckBox" name="WV3_chbox">
+                    <property name="text">
+                     <string>WorldView-3</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="WV2_chbox">
+                    <property name="text">
+                     <string>WorldView-2</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="GE01_chbox">
+                    <property name="text">
+                     <string>GeoEye-1</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="QB01_chbox">
+                    <property name="text">
+                     <string>QuickBird</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="verticalSpacer_2">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_5">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="Line" name="line">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_7">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="MS_verticalLayout">
+                  <item>
+                   <widget class="QCheckBox" name="WV1_chbox">
+                    <property name="text">
+                     <string>WorldView-1</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="verticalSpacer">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_10">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <spacer name="horizontalSpacer_4">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="stereo_chbox">
+                <property name="font">
+                 <font>
+                  <italic>true</italic>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>только стерео</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_13">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>Выгрузка</string>
+      </attribute>
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
@@ -917,6 +1145,72 @@
        <property name="standardButtons">
         <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
        </property>
+      </widget>
+      <widget class="QTextBrowser" name="test_textBrowser">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>30</y>
+         <width>406</width>
+         <height>130</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QToolBox" name="parameters_toolBox">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>190</y>
+         <width>403</width>
+         <height>123</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
+       <property name="tabSpacing">
+        <number>6</number>
+       </property>
+       <widget class="QWidget" name="GeometrySlot">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>379</width>
+          <height>406</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>Поиск в архиве Иннотер</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_4"/>
+       </widget>
+       <widget class="QWidget" name="ImagerySlot">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>403</width>
+          <height>69</height>
+         </rect>
+        </property>
+        <attribute name="label">
+         <string>Поиск в БД операторов</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_5"/>
+       </widget>
       </widget>
      </widget>
     </widget>
