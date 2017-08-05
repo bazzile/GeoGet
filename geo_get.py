@@ -204,6 +204,8 @@ class GeoGet:
         # слой выбран, переключаем текущую [currentIndex()] вкладку на следующую
         self.dlg.v_layer_list.activated.connect(
             lambda: self.dlg.parameters_toolBox.setCurrentIndex(int(self.dlg.parameters_toolBox.currentIndex()) + 1))
+        self.dlg.in_browse_btn_2.clicked.connect(
+            lambda: self.set_output(obj_type='folder'))
 
 
         # TODO удалить этот тест-блок
@@ -298,6 +300,7 @@ class GeoGet:
             u'Полигоны (*.shp *.kml *tab *geojson)')
         if not filename:
             return None
+        # TODO разобрать эту дичь: здесь else и if filename - одно и то же!
         else:
             # записываем в self.last_used_path последний использовавшийся каталог
             self.last_used_path = os.path.dirname(filename)
@@ -309,6 +312,16 @@ class GeoGet:
             self.load_layer(filename, os.path.basename(filename), 'ogr')
         else:
             pass
+
+    def set_output(self, obj_type):
+        path = self.last_used_path if self.last_used_path is not None else ""
+        if obj_type == 'folder':
+            folder_path = str(QFileDialog.getExistingDirectory(self.dlg, "Выберите директорию", path))
+            if not folder_path:
+                return None
+            else:
+                self.dlg.lineEdit.setText(folder_path)
+                self.last_used_path = folder_path
 
     def load_layer(self, path, name, data_provider):
         lyr = self.iface.addVectorLayer(path, name.split('.')[0], data_provider)
