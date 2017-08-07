@@ -209,6 +209,7 @@ class GeoGet:
             lambda: self.dlg.parameters_toolBox.setCurrentIndex(int(self.dlg.parameters_toolBox.currentIndex()) + 1))
         self.dlg.in_browse_btn_2.clicked.connect(
             lambda: self.set_output(obj_type='folder'))
+        self.dlg.search_btn.clicked.connect(self.search_inner_db)
 
 
         # TODO удалить этот тест-блок
@@ -223,8 +224,8 @@ class GeoGet:
         # if str(self.dlg.v_layer_list.currentText()) != u'Выберите слой' or None:
         self.dlg.v_layer_list.activated.connect(
             lambda: self.zoom2layer(self.dlg.v_layer_list.currentText().encode('utf-8').decode('utf-8')))
-        self.dlg.search_btn.clicked.connect(
-            lambda: self.t_search_db(self.dlg.v_layer_list.currentText().encode('utf-8').decode('utf-8')))
+        # self.dlg.search_btn.clicked.connect(
+        #     lambda: self.t_search_db(self.dlg.v_layer_list.currentText().encode('utf-8').decode('utf-8')))
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -337,40 +338,56 @@ class GeoGet:
                 self.iface.zoomToActiveLayer()
                 break
 
-    def t_search_db(self, layer_path):
-        # TODO разобраться, почему при выборе "очистить результаты" (после поиска без опции) удляются не все слои
+    # def t_search_db(self, layer_path):
+    #     # TODO разобраться, почему при выборе "очистить результаты" (после поиска без опции) удляются не все слои
+    #     if self.dlg.clear_results_chbx.isChecked():
+    #         layers = self.clear_results(self.get_layers_list())
+    #     else:
+    #         layers = [layer for layer in self.get_layers_list() if not layer.name().startswith('results_')]
+    #     for layer in layers:
+    #         if layer.source() == layer_path:
+    #             lyr = self.Geometry.get_layer(layer_path)
+    #             wkt = self.Geometry.get_geometry(lyr)
+    #             # TODO добавить поддержку минимальной облачности (аккуратно, во внутр. БД есть -9999)
+    #             sat_set = self.get_sat_set()
+    #             dates_dict = self.get_date_range()
+    #             stereo_flag = self.get_stereo_flag()
+    #             sql = self.PSQL.querySet(
+    #                 dates_dict, self.Cloud_pct_control.get_mx_value(), self.Angle_control.get_mx_value(), sat_set,
+    #                 stereo_flag, wkt)
+    #             result_layer_name = 'results_DG'
+    #             self.PSQL.loadSql(result_layer_name, sql)
+    #             # загрузка готового стиля для слоя с результатами
+    #             # shape_lyr = self.iface.activeLayer()
+    #             shape_lyr = None
+    #             for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
+    #                 if lyr.name() == result_layer_name:
+    #                     shape_lyr = lyr
+    #                     break
+    #             # shape_lyr = QgsMapLayerRegistry.instance().mapLayerByName("results_DG")
+    #             shape_lyr.loadNamedStyle(os.path.join(
+    #                 os.path.dirname(os.path.join(__file__)), 'testData', 'Shape_Style.qml'))
+    #
+    #             if self.dlg.open_attr_form_chbox.isChecked():
+    #                 self.iface.showAttributeTable(shape_lyr)
+    #             self.dlg.test_textBrowser.setText(str(self.get_date_range()))
+    #             break
+    def search_inner_db(self):
+        # очищаем результаты предыдущего поиска, если выбрана опция "очистить результаты"
         if self.dlg.clear_results_chbx.isChecked():
             layers = self.clear_results(self.get_layers_list())
         else:
-            layers = [layer for layer in self.get_layers_list() if not layer.name().startswith('results_')]
-        for layer in layers:
-            if layer.source() == layer_path:
-                lyr = self.Geometry.get_layer(layer_path)
-                wkt = self.Geometry.get_geometry(lyr)
-                # TODO добавить поддержку минимальной облачности (аккуратно, во внутр. БД есть -9999)
-                sat_set = self.get_sat_set()
-                dates_dict = self.get_date_range()
-                stereo_flag = self.get_stereo_flag()
-                sql = self.PSQL.querySet(
-                    dates_dict, self.Cloud_pct_control.get_mx_value(), self.Angle_control.get_mx_value(), sat_set,
-                    stereo_flag, wkt)
-                result_layer_name = 'results_DG'
-                self.PSQL.loadSql(result_layer_name, sql)
-                # загрузка готового стиля для слоя с результатами
-                # shape_lyr = self.iface.activeLayer()
-                shape_lyr = None
-                for lyr in QgsMapLayerRegistry.instance().mapLayers().values():
-                    if lyr.name() == result_layer_name:
-                        shape_lyr = lyr
-                        break
-                # shape_lyr = QgsMapLayerRegistry.instance().mapLayerByName("results_DG")
-                shape_lyr.loadNamedStyle(os.path.join(
-                    os.path.dirname(os.path.join(__file__)), 'testData', 'Shape_Style.qml'))
+            layers = [layer for layer in self.get_layers_list() if not layer.name().startswith('results_inner_')]
+        # order_desc_criteria = self.dlg.
+        order_desc_criteria = self.PSQL.simpleQuery()
+        sql = self.PSQL.querySet(
+            order_desc_list=order_desc_criteria)
+        result_layer_name = 'results_inner_DB'
 
-                if self.dlg.open_attr_form_chbox.isChecked():
-                    self.iface.showAttributeTable(shape_lyr)
-                self.dlg.test_textBrowser.setText(str(self.get_date_range()))
-                break
+        self.dlg.test_textBrowser.setText(str(sql))
+
+        self.PSQL.loadSql(result_layer_name, sql)
+
 
     def clear_results(self, layer_list):
         """Удаляет из реестра слоёв результаты предыдущего поиска"""

@@ -58,10 +58,11 @@ class PSQL:
             self, order_desc_list, schema='geoarchive', table='dg_orders'):
         # TODO подумать, как выделить WHERE часть отдельно
         # Добавляем кавычки, чтобы platform/sat_set не выдавал ошибку (no such table)
-        order_desc_cond = " AND order_desc IN (" + ', '.join(["'%s'" %item for item in order_desc_list]) + ")"
+        order_desc_cond = "AND order_desc IN (" + ', '.join(["'%s'" %item for item in order_desc_list]) + ")"
         # Если необходим уникальный ключ (ogc_fid): sql = "SELECT *" + ", row_number() OVER () AS ogc_fid FROM " + schema + \
+        # '1 = 1' нужно для того, чтобы любой критерий мог начинаться с 'AND' (даже если он один)
         sql = "SELECT * FROM " + schema + \
-              "." + table + " WHERE " + order_desc_cond
+              "." + table + " WHERE 1 = 1 " + order_desc_cond
         return sql
 
     def simpleQuery(self):
@@ -79,9 +80,10 @@ class PSQL:
     #  (нужно только если на выходе запроса нет ключевых полей) на vendor_id
     def loadSql(self, layerName, sql):
         uri = QgsDataSourceURI()
-        uri.setConnection("192.168.0.107", "5432", "innoter", "postgres", "postgres")
+        uri.setConnection("db.office.innoter.com", "5432", "geodata", "read_user", "user")
         # Если необходим уникальный ключ (ogc_fid): uri.setDataSource("", "(" + sql + ")", "geom", "", "ogc_fid")
-        uri.setDataSource("", "(" + sql + ")", "geom", "", "gid")
+        # в качестве последней переменной ВСЕГДА идёт primary key
+        uri.setDataSource("", "(" + sql + ")", "geom", "", "order_id")
         vlayer = QgsVectorLayer(uri.uri(), layerName, "postgres")
         QgsMapLayerRegistry.instance().addMapLayer(vlayer)
 
