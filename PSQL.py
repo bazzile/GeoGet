@@ -28,6 +28,8 @@ from qgis.core import *
 
 import os.path
 import datetime
+import psycopg2
+
 
 class PSQL:
 
@@ -35,23 +37,43 @@ class PSQL:
         self.iface = iface
         self.schema = ""
 
+    # def querySet(
+    #         self, dates_dict, cloud_pct_mx, off_nadir_mx, sat_set, stereo_flag, wkt,
+    #         crs='4326', schema='vendors', table='dg', geom_field='geom'):
+    #     # TODO подумать, как выделить WHERE часть отдельно
+    #     date_cond = " AND acqdate < " + "'" + dates_dict['max_date'] + "'" \
+    #                 + " AND acqdate > " + "'" + dates_dict['min_date'] + "'"
+    #     cloud_cond = " AND cloudcover <= " + str(cloud_pct_mx)
+    #     off_nadir_cond = " AND mxoffnadir <= " + str(off_nadir_mx)
+    #     # TODO добавить ошибку if platform is null
+    #     # Добавляем кавычки, чтобы platform/sat_set не выдавал ошибку (no such table)
+    #     sat_cond = " AND platform IN (" + ', '.join(["'%s'" %item for item in sat_set]) + ")"
+    #     stereo_cond = " AND stereopair <> 'NONE'" if stereo_flag is True else ""
+    #     # Если необходим уникальный ключ (ogc_fid): sql = "SELECT *" + ", row_number() OVER () AS ogc_fid FROM " + schema + \
+    #     sql = "SELECT * FROM " + schema + \
+    #           "." + table + " WHERE ST_Intersects(" + geom_field + ", ST_GeomFromText('" + wkt + "', " + crs + "))" + \
+    #           cloud_cond + off_nadir_cond + sat_cond + stereo_cond + date_cond + " LIMIT 100"
+    #     return sql
     def querySet(
-            self, dates_dict, cloud_pct_mx, off_nadir_mx, sat_set, stereo_flag, wkt,
-            crs='4326', schema='vendors', table='dg', geom_field='geom'):
+            self, order_desc_list, schema='geoarchive', table='dg_orders'):
         # TODO подумать, как выделить WHERE часть отдельно
-        date_cond = " AND acqdate < " + "'" + dates_dict['max_date'] + "'" \
-                    + " AND acqdate > " + "'" + dates_dict['min_date'] + "'"
-        cloud_cond = " AND cloudcover <= " + str(cloud_pct_mx)
-        off_nadir_cond = " AND mxoffnadir <= " + str(off_nadir_mx)
-        # TODO добавить ошибку if platform is null
         # Добавляем кавычки, чтобы platform/sat_set не выдавал ошибку (no such table)
-        sat_cond = " AND platform IN (" + ', '.join(["'%s'" %item for item in sat_set]) + ")"
-        stereo_cond = " AND stereopair <> 'NONE'" if stereo_flag is True else ""
+        order_desc_cond = " AND order_desc IN (" + ', '.join(["'%s'" %item for item in order_desc_list]) + ")"
         # Если необходим уникальный ключ (ogc_fid): sql = "SELECT *" + ", row_number() OVER () AS ogc_fid FROM " + schema + \
         sql = "SELECT * FROM " + schema + \
-              "." + table + " WHERE ST_Intersects(" + geom_field + ", ST_GeomFromText('" + wkt + "', " + crs + "))" + \
-              cloud_cond + off_nadir_cond + sat_cond + stereo_cond + date_cond + " LIMIT 100"
+              "." + table + " WHERE " + order_desc_cond
         return sql
+
+    def simpleQuery(self):
+        try:
+            conn = psycopg2.connect("dbname='geodata' user='postgres' host='localhost' password='postgres'")
+        except:
+            print "I am unable to connect to the database"
+        cursor = conn.cursor()
+        cursor.execute("""SELECT order_desc FROM geoarchive.dg_orders""")
+        order_desc_result = cursor.fetchall()
+        order_desc_list = [item[0] for item in order_desc_result]
+        return order_desc_list
 
     # TODO реализовать загрузку в одну строку через iface, делать запрос по *, заменить ogc_fid
     #  (нужно только если на выходе запроса нет ключевых полей) на vendor_id

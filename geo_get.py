@@ -200,6 +200,9 @@ class GeoGet:
 
         self.populateComboBox(
             self.dlg.v_layer_list, self.get_layer_names(), u'Выберите слой', True)
+        # TODO выполнять только по клику
+        self.populateComboBox(
+            self.dlg.proj_code_comboBox, self.PSQL.simpleQuery(), u'не учитывать', True)
         self.dlg.in_browse_btn.clicked.connect(self.select_input_file)
         # слой выбран, переключаем текущую [currentIndex()] вкладку на следующую
         self.dlg.v_layer_list.activated.connect(
@@ -300,23 +303,19 @@ class GeoGet:
             u'Полигоны (*.shp *.kml *tab *geojson)')
         if not filename:
             return None
-        # TODO разобрать эту дичь: здесь else и if filename - одно и то же!
         else:
-            # записываем в self.last_used_path последний использовавшийся каталог
-            self.last_used_path = os.path.dirname(filename)
         # TODO отображать в списке только имя контура без пути и расшир (реализовать через словарь? (т.к. нужен и путь)
-        if filename:
             self.dlg.v_layer_list.insertItem(self.dlg.v_layer_list.count(), filename)
             self.dlg.v_layer_list.setCurrentIndex(self.dlg.v_layer_list.count() - 1)
             # TODO лучше всего загружать слой в QGIS вместе с результатами
             self.load_layer(filename, os.path.basename(filename), 'ogr')
-        else:
-            pass
+            # записываем в self.last_used_path последний использовавшийся каталог
+            self.last_used_path = os.path.dirname(filename)
 
     def set_output(self, obj_type):
         path = self.last_used_path if self.last_used_path is not None else ""
         if obj_type == 'folder':
-            folder_path = str(QFileDialog.getExistingDirectory(self.dlg, "Выберите директорию", path))
+            folder_path = str(QFileDialog.getExistingDirectory(self.dlg, u"Выберите директорию", path))
             if not folder_path:
                 return None
             else:

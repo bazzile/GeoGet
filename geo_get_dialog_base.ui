@@ -124,9 +124,9 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_10">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <layout class="QHBoxLayout" name="Project_code_HL">
             <item>
-             <widget class="QLabel" name="label_6">
+             <widget class="QLabel" name="proj_code_label">
               <property name="font">
                <font>
                 <weight>50</weight>
@@ -139,7 +139,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox">
+             <widget class="QComboBox" name="proj_code_comboBox">
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContents</enum>
               </property>
@@ -148,9 +148,9 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <layout class="QHBoxLayout" name="Contract_num_HL">
             <item>
-             <widget class="QLabel" name="label_7">
+             <widget class="QLabel" name="contract_num_label">
               <property name="font">
                <font>
                 <weight>50</weight>
@@ -163,7 +163,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_2">
+             <widget class="QComboBox" name="contract_num_comboBox">
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContents</enum>
               </property>
@@ -172,9 +172,9 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <layout class="QHBoxLayout" name="Invoice_num_HL">
             <item>
-             <widget class="QLabel" name="label_8">
+             <widget class="QLabel" name="Invoice_num_label">
               <property name="font">
                <font>
                 <weight>50</weight>
@@ -187,7 +187,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="comboBox_3">
+             <widget class="QComboBox" name="Invoice_num_comboBox">
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContents</enum>
               </property>
@@ -196,7 +196,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="Dates_HL_2">
+           <layout class="QHBoxLayout" name="Proj_Dates_HL">
             <item>
              <widget class="QLabel" name="label_13">
               <property name="font">
@@ -237,7 +237,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="min_dateEdit_2">
+             <widget class="QDateEdit" name="proj_min_dateEdit">
               <property name="styleSheet">
                <string notr="true">background-color: white</string>
               </property>
@@ -270,7 +270,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="max_dateEdit_2">
+             <widget class="QDateEdit" name="proj_max_dateEdit">
               <property name="styleSheet">
                <string notr="true">background-color: white</string>
               </property>
