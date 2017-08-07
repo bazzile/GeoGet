@@ -378,16 +378,18 @@ class GeoGet:
             layers = self.clear_results(self.get_layers_list())
         else:
             layers = [layer for layer in self.get_layers_list() if not layer.name().startswith('results_inner_')]
-        # order_desc_criteria = self.dlg.
-        order_desc_criteria = self.PSQL.simpleQuery()
+        order_desc_criteria = str(self.dlg.proj_code_comboBox.currentText())
         sql = self.PSQL.querySet(
-            order_desc_list=order_desc_criteria)
+            order_desc=order_desc_criteria)
         result_layer_name = 'results_inner_DB'
 
+        # TODO удалить - тест
         self.dlg.test_textBrowser.setText(str(sql))
+        #
 
-        self.PSQL.loadSql(result_layer_name, sql)
-
+        layer = self.PSQL.loadSql(result_layer_name, sql)
+        layer_path = layer.source()
+        self.zoom2layer(layer_path)
 
     def clear_results(self, layer_list):
         """Удаляет из реестра слоёв результаты предыдущего поиска"""
