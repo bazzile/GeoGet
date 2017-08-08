@@ -67,7 +67,7 @@ class PSQL:
 
     def simpleQuery(self):
         try:
-            conn = psycopg2.connect("dbname='geodata' user='postgres' host='localhost' password='postgres'")
+            conn = psycopg2.connect("dbname='geodata' host='db.office.innoter.com' user='read_user' password='user'")
         except:
             print "I am unable to connect to the database"
         cursor = conn.cursor()
