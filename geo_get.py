@@ -31,6 +31,8 @@ import os
 # импорт моих модулей
 from geometry import Geomerty
 from PSQL import PSQL
+import functions_qgis
+import functions_os
 from controls import *
 
 
@@ -95,6 +97,7 @@ class GeoGet:
         self.Angle_control = SyncedSlider(self.dlg.angle_slider, self.dlg.angle_mx)
         # мои переменный
         self.last_used_path = None
+        self.results_layer = None
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -198,9 +201,15 @@ class GeoGet:
         # Кнопка "Выгрузить"
         self.dlg.in_browse_btn_2.clicked.connect(
             lambda: self.set_output(obj_type='folder'))
+        # TODO выводить ошибку "слой с результатами не найден", если self.results_layer is None
+        # self.dlg.pushButton.clicked.connect(lambda: self.dlg.test_textBrowser.setText(str(functions_qgis.get_values_from_layer(self.results_layer, 'path'))))
+        self.dlg.pushButton.clicked.connect(
+            lambda: functions_os.extract2folder(
+                functions_qgis.get_values_from_layer(
+                    self.results_layer, 'path'), str(self.dlg.lineEdit.text())))
         # TODO выполнять только по клику
-        # self.populateComboBox(
-        #     self.dlg.proj_code_comboBox, self.PSQL.simpleQuery(), u'--- не учитывать ---', True)
+        self.populateComboBox(
+            self.dlg.proj_code_comboBox, self.PSQL.simpleQuery(), u'--- не учитывать ---', True)
         self.populateComboBox(
             self.dlg.v_layer_list, self.get_layer_names(), u'Выберите слой', True)
         self.dlg.in_browse_btn.clicked.connect(self.select_input_file)
@@ -403,8 +412,8 @@ class GeoGet:
         self.dlg.test_textBrowser.setText(str(sql))
         #
 
-        layer = self.PSQL.loadSql(result_layer_name, sql)
-        layer_path = layer.source()
+        self.results_layer = self.PSQL.loadSql(result_layer_name, sql)
+        layer_path = self.results_layer.source()
         self.zoom2layer(layer_path)
 
     def clear_results(self, layer_list):
