@@ -146,6 +146,9 @@
               <property name="styleSheet">
                <string notr="true">background-color: white;</string>
               </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
               <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToContents</enum>
               </property>
@@ -253,18 +256,18 @@
               <property name="styleSheet">
                <string notr="true">background-color: white</string>
               </property>
-              <property name="displayFormat">
-               <string>d.MM.yyyy</string>
-              </property>
-              <property name="calendarPopup">
-               <bool>true</bool>
-              </property>
               <property name="date">
                <date>
                 <year>2016</year>
                 <month>1</month>
                 <day>1</day>
                </date>
+              </property>
+              <property name="displayFormat">
+               <string>d.MM.yyyy</string>
+              </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -286,18 +289,18 @@
               <property name="styleSheet">
                <string notr="true">background-color: white</string>
               </property>
-              <property name="displayFormat">
-               <string>d.MM.yyyy</string>
-              </property>
-              <property name="calendarPopup">
-               <bool>true</bool>
-              </property>
               <property name="date">
                <date>
                 <year>2017</year>
                 <month>1</month>
                 <day>1</day>
                </date>
+              </property>
+              <property name="displayFormat">
+               <string>d.MM.yyyy</string>
+              </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -752,18 +755,18 @@
                 <property name="styleSheet">
                  <string notr="true">background-color: white</string>
                 </property>
-                <property name="displayFormat">
-                 <string>d.MM.yyyy</string>
-                </property>
-                <property name="calendarPopup">
-                 <bool>true</bool>
-                </property>
                 <property name="date">
                  <date>
                   <year>2016</year>
                   <month>1</month>
                   <day>1</day>
                  </date>
+                </property>
+                <property name="displayFormat">
+                 <string>d.MM.yyyy</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -779,18 +782,18 @@
                 <property name="styleSheet">
                  <string notr="true">background-color: white</string>
                 </property>
-                <property name="displayFormat">
-                 <string>d.MM.yyyy</string>
-                </property>
-                <property name="calendarPopup">
-                 <bool>true</bool>
-                </property>
                 <property name="date">
                  <date>
                   <year>2017</year>
                   <month>1</month>
                   <day>1</day>
                  </date>
+                </property>
+                <property name="displayFormat">
+                 <string>d.MM.yyyy</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -1138,7 +1141,11 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_9">
             <item>
-             <widget class="QLineEdit" name="lineEdit"/>
+             <widget class="QLineEdit" name="lineEdit">
+              <property name="styleSheet">
+               <string notr="true">background-color: white;</string>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="in_browse_btn_2">
@@ -1342,8 +1349,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>132</width>
-          <height>69</height>
+          <width>100</width>
+          <height>30</height>
          </rect>
         </property>
         <attribute name="label">

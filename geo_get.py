@@ -34,6 +34,16 @@ from PSQL import PSQL
 from controls import *
 
 
+# class ComboBox(QComboBox):
+#     # Изменяем класс ComboBox, для того чтобы по клику он исполнял функцию
+#     # https://stackoverflow.com/questions/35932660/qcombobox-click-event
+#     popupAboutToBeShown = pyqtSignal()
+#
+#     def showPopup(self):
+#         self.popupAboutToBeShown.emit()
+#         super(ComboBox, self).showPopup()
+
+
 class GeoGet:
     """QGIS Plugin Implementation."""
 
@@ -100,7 +110,6 @@ class GeoGet:
         """
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
         return QCoreApplication.translate('GeoGet', message)
-
 
     def add_action(
         self,
@@ -181,9 +190,27 @@ class GeoGet:
         icon_path = ':/plugins/GeoGet/icon.png'
         self.add_action(
             icon_path,
-            text=self.tr(u'Innoter GeoGet'),
+            text=str(self.tr(u'Innoter GeoGet')),
             callback=self.run,
             parent=self.iface.mainWindow())
+
+        # My GUI part
+        # Кнопка "Выгрузить"
+        self.dlg.in_browse_btn_2.clicked.connect(
+            lambda: self.set_output(obj_type='folder'))
+        # TODO выполнять только по клику
+        # self.populateComboBox(
+        #     self.dlg.proj_code_comboBox, self.PSQL.simpleQuery(), u'--- не учитывать ---', True)
+        self.populateComboBox(
+            self.dlg.v_layer_list, self.get_layer_names(), u'Выберите слой', True)
+        self.dlg.in_browse_btn.clicked.connect(self.select_input_file)
+        # слой выбран, переключаем текущую [currentIndex()] вкладку на следующую
+        self.dlg.v_layer_list.activated.connect(
+            lambda: self.dlg.parameters_toolBox.setCurrentIndex(int(self.dlg.parameters_toolBox.currentIndex()) + 1))
+        self.dlg.search_btn.clicked.connect(self.search_inner_db)
+        # !!!
+        # self.dlg.proj_code_comboBox = ComboBox(self.dlg)
+        # self.dlg.proj_code_comboBox.activated.connect(lambda: self.dlg.test_textBrowser.setText(str('Cool!')))
 
     def populateGui(self):
         """Make the GUI live."""
@@ -197,19 +224,6 @@ class GeoGet:
         # lyr = self.iface.addVectorLayer(
         #     os.path.join(os.path.dirname(__file__), r"testData\test_polygon.shp"), 'Test_Polygon', 'ogr')
         # lyr.loadNamedStyle(os.path.join(os.path.dirname(os.path.join(__file__)), 'testData', 'Test_Polygon_Style.qml'))
-
-        self.populateComboBox(
-            self.dlg.v_layer_list, self.get_layer_names(), u'Выберите слой', True)
-        # TODO выполнять только по клику
-        self.populateComboBox(
-            self.dlg.proj_code_comboBox, self.PSQL.simpleQuery(), u'не учитывать', True)
-        self.dlg.in_browse_btn.clicked.connect(self.select_input_file)
-        # слой выбран, переключаем текущую [currentIndex()] вкладку на следующую
-        self.dlg.v_layer_list.activated.connect(
-            lambda: self.dlg.parameters_toolBox.setCurrentIndex(int(self.dlg.parameters_toolBox.currentIndex()) + 1))
-        self.dlg.in_browse_btn_2.clicked.connect(
-            lambda: self.set_output(obj_type='folder'))
-        self.dlg.search_btn.clicked.connect(self.search_inner_db)
 
 
         # TODO удалить этот тест-блок
@@ -274,6 +288,8 @@ class GeoGet:
             else:
                 combo.insertItem(0, predef)
                 combo.setCurrentIndex(0)
+            # combo.model().item(0).setEnabled(False)
+            combo.model().item(0).setBackground(QBrush(QColor(200, 200, 200)))
         combo.blockSignals(False)
 
     def get_layers_list(self):
