@@ -206,7 +206,7 @@ class GeoGet:
         self.dlg.pushButton.clicked.connect(
             lambda: functions_os.extract2folder(
                 functions_qgis.get_values_from_layer(
-                    self.results_layer, 'path'), str(self.dlg.lineEdit.text())))
+                    self.results_layer, 'path'), str(self.dlg.lineEdit.text()).encode('utf-8').decode('utf-8')))
         # TODO выполнять только по клику
         self.populateComboBox(
             self.dlg.proj_code_comboBox, self.PSQL.simpleQuery(), u'--- не учитывать ---', True)
