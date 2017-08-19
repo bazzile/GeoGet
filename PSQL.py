@@ -68,13 +68,19 @@ class PSQL:
     def simpleQuery(self):
         try:
             conn = psycopg2.connect("dbname='geodata' host='db.office.innoter.com' user='read_user' password='user'")
+            cursor = conn.cursor()
+            cursor.execute("""SELECT order_desc FROM geoarchive.dg_orders""")
+            order_desc_result = cursor.fetchall()
+            order_desc_list = [item[0] for item in order_desc_result]
+            return order_desc_list
         except:
+            # TODO выводить ошибку
+            msg = QMessageBox()
+            msg.setText(u"Не могу подключиться к базе данных =(")
+            msg.setIcon(QMessageBox.Critical)
+            return []
             print "I am unable to connect to the database"
-        cursor = conn.cursor()
-        cursor.execute("""SELECT order_desc FROM geoarchive.dg_orders""")
-        order_desc_result = cursor.fetchall()
-        order_desc_list = [item[0] for item in order_desc_result]
-        return order_desc_list
+
 
     # TODO реализовать загрузку в одну строку через iface, делать запрос по *, заменить ogc_fid
     #  (нужно только если на выходе запроса нет ключевых полей) на vendor_id

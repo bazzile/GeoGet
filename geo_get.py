@@ -190,6 +190,7 @@ class GeoGet:
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
+
         icon_path = ':/plugins/GeoGet/icon.png'
         self.add_action(
             icon_path,
@@ -202,11 +203,10 @@ class GeoGet:
         self.dlg.in_browse_btn_2.clicked.connect(
             lambda: self.set_output(obj_type='folder'))
         # TODO выводить ошибку "слой с результатами не найден", если self.results_layer is None
-        # self.dlg.pushButton.clicked.connect(lambda: self.dlg.test_textBrowser.setText(str(functions_qgis.get_values_from_layer(self.results_layer, 'path'))))
         self.dlg.pushButton.clicked.connect(
             lambda: functions_os.extract2folder(
-                functions_qgis.get_values_from_layer(
-                    self.results_layer, 'path'), str(self.dlg.lineEdit.text()).encode('utf-8').decode('utf-8')))
+                file_list=functions_qgis.get_values_from_layer(self.results_layer, 'path'),
+                dst_folder=self.dlg.lineEdit.text()).encode('utf-8').decode('utf-8'))
         # TODO выполнять только по клику
         self.populateComboBox(
             self.dlg.proj_code_comboBox, self.PSQL.simpleQuery(), u'--- не учитывать ---', True)
@@ -341,7 +341,8 @@ class GeoGet:
     def set_output(self, obj_type):
         path = self.last_used_path if self.last_used_path is not None else ""
         if obj_type == 'folder':
-            folder_path = str(QFileDialog.getExistingDirectory(self.dlg, u"Выберите директорию", path))
+            folder_path = QFileDialog.getExistingDirectory(
+                    self.dlg, u"Выберите директорию", path).encode('utf-8').decode('utf-8')
             if not folder_path:
                 return None
             else:
